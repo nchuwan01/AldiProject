@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")))
 app.use(express.json())
 
-
 app.get("/managerStatusPage", function (req, res){
     res.render("managerStatusPage")
 })
