@@ -2,6 +2,7 @@
 let mysql = require('mysql');
 const bodyParser = require("body-parser");
 let PTODATA = require('./PTOAccrualBrackets.json');
+let PTOUserData = require('./PTOUserSeedData.json');
 
 //console.log(JSON.parse(ObjectT[0].Name));
 
@@ -17,6 +18,34 @@ let con = mysql.createConnection({
 con.connect((err) => {
     if (err) return console.error(
         'error: ' + err.message);
+
+    for(let i =0; i< PTOUserData.length; i++)
+    {
+        //employeeid	firstName	lastName	email	leaderid	hiredate	role	yearsWorked
+
+        var employeeid = PTOUserData[i].EmployeeId,
+            firstName= PTOUserData[i].FirstName,
+            lastName= PTOUserData[i].LastName,
+            email= PTOUserData[i].Email,
+            leaderid= PTOUserData[i].LeaderId,
+            hiredate= PTOUserData[i].HireDate,
+            role= PTOUserData[i].Role,
+            yearsWorked= 5;
+
+        var insertStatement =
+            ` INSERT INTO employee values(?, ?, ?, ?,?,?,?,?)`;
+        var items = [employeeid, firstName, lastName, email,leaderid,hiredate,role,yearsWorked];
+
+
+        con.query(insertStatement, items,
+            (err, results, fields) => {
+                return console.log(err);
+            }
+        );
+
+    }
+
+
 
     for(let i=0; i<PTODATA.length; i++)
     {
