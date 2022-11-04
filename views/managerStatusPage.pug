@@ -3,7 +3,7 @@ head
     title Manager Status
     link(rel="stylesheet" href="./css/bootstrap.min.css")
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
     style.
         body {
             font-family: "Lato", sans-serif;
@@ -16,7 +16,7 @@ head
             z-index: 1;
             top: 0;
             left: 0;
-            background-color: #111;
+            background-color: #D2D7E1;
             overflow-x: hidden;
             padding-top: 16px;
         }
@@ -25,7 +25,7 @@ head
             padding: 6px 8px 6px 16px;
             text-decoration: none;
             font-size: 20px;
-            color: #818181;
+            color: #000000;
             display: block;
         }
 
@@ -53,16 +53,16 @@ body
             i.fa.fa-fw.fa-home
             |  Home
         a(href='#requestPTO')
-            i.fa.fa-fw.fa-wrench
+            i.fa-solid.fa-hat-wizard
             |  Request PTO
         a(href='#statuses')
-            i.fa.fa-fw.fa-user
+            i.fa-regular.fa-clock
             |  Statuses
         a(href='#employeeReport')
-            i.fa.fa-fw.fa-envelope
+            i.fa-solid.fa-pencil
             |  Employee Report
         a(href='#printReport')
-            i.fa.fa-fw.fa-envelope
+            i.fa-regular.fa-file
             |  Print Report
 
     .main
