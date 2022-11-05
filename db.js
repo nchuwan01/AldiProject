@@ -1,9 +1,7 @@
 /* connects to the database */
 let mysql = require('mysql');
-const bodyParser = require("body-parser");
 let PTODATA = require('./PTOAccrualBrackets.json');
 let PTOUserData = require('./PTOUserSeedData.json');
-const {query} = require("express");
 //console.log(JSON.parse(ObjectT[0].Name));
 
 //console.log(ObjectT.length);
@@ -17,6 +15,8 @@ let con = mysql.createConnection({
 
 
 con.connect((err) => {
+    console.log(PTOUserData.length);
+    console.log(PTODATA.length);
     if (err) return console.error('error: ' + err.message);
 
     for (let i = 0; i < PTOUserData.length; i++) {
@@ -51,38 +51,64 @@ con.connect((err) => {
             ` INSERT INTO employee values(?, ?, ?, ?,?,?,?,?)`;
         var items = [employeeid, firstName, lastName, email, leaderid, hiredate, role, yearsWorked5];
 
-     /*   con.query(insertStatement, items,
-            (err, results, fields) => {
+        con.query(insertStatement, items,
+            (err, results, filds) => {
                 return console.log(err);
             }
-        )*/;
+        )
+
+        for(let j=0; j<PTODATA.length; j++)
+        {
+            var  employeeid = PTOUserData[i].EmployeeId;
+            let vd = PTODATA[j].VacationPerYear;
+            let pd = PTODATA[j].PersonalPerYear;
+            let sd =  PTODATA[j].SickPerYear;
+
+            var insertStatement = `INSERT INTO ptoBalance values(?, ?, ?, ?)`;
+            var items = [employeeid,vd,pd,sd];
+
+            if(PTODATA[j].Role == PTOUserData[i].Role)
+            {
+                while(totalDaysCount > PTODATA[j].NumberOfYears)
+                {
+                    totalDaysCount -= 1;
+                }
+                if(totalDaysCount == PTODATA[j].NumberOfYears)
+                {
+                    con.query(insertStatement, items,
+                        (err, results, fields) => {return console.log(err);});
+                }
+            }
+
+        }
+
 
     }
 
 
-    for(let i=0; i<PTODATA.length; i++)
-    {
-             var yearsWorked = PTODATA[i].NumberOfYears,
-                 role = PTODATA[i].Role,
-                 maxVac = PTODATA[i].MaxVacation,
-                 vacPerYear = PTODATA[i].VacationPerYear,
-                 vacAccuralDate = PTODATA[i].VacationAccuralDate,
-                 maxPer = PTODATA[i].MaxPersonal,
-                 perPerYear = PTODATA[i].PersonalPerYear,
-                 perAccuralDate= PTODATA[i].PersonalAccuralDate,
-                 maxSick = PTODATA[i].MaxSick,
-                 sickPerYear = PTODATA[i].SickPerYear,
-                 sickAccural = PTODATA[i].SickAccuralDate;
+            for(let i=0; i<PTODATA.length; i++)
+            {
+                     var yearsWorked = PTODATA[i].NumberOfYears,
+                         role = PTODATA[i].Role,
+                         maxVac = PTODATA[i].MaxVacation,
+                         vacPerYear = PTODATA[i].VacationPerYear,
+                         vacAccuralDate = PTODATA[i].VacationAccuralDate,
+                         maxPer = PTODATA[i].MaxPersonal,
+                         perPerYear = PTODATA[i].PersonalPerYear,
+                         perAccuralDate= PTODATA[i].PersonalAccuralDate,
+                         maxSick = PTODATA[i].MaxSick,
+                         sickPerYear = PTODATA[i].SickPerYear,
+                         sickAccural = PTODATA[i].SickAccuralDate;
 
-             var insertStatement =
-                 `INSERT INTO accural values(?, ?, ?, ?,?,?,?,?,?,?,?)`;
-             var items = [yearsWorked, role, maxVac, vacPerYear,vacAccuralDate,maxPer,perPerYear,perAccuralDate,maxSick,sickPerYear,sickAccural ];
+                     var insertStatement =
+                         `INSERT INTO accural values(?, ?, ?, ?,?,?,?,?,?,?,?)`;
+                     var items = [yearsWorked, role, maxVac, vacPerYear,vacAccuralDate,maxPer,perPerYear,perAccuralDate,maxSick,sickPerYear,sickAccural ];
 
-/*
-             con.query(insertStatement, items,
-                 (err, results, fields) => {return console.log(err);});*/
+        /*
+                     con.query(insertStatement, items,
+                         (err, results, fields) => {return console.log(err);});*/
 
-             for(let j = 0; j < PTOUserData.length; j++)
+          /*   for(let j = 0; j < PTOUserData.length; j++)
              {
 
                  if(PTOUserData[j].Role == PTODATA[i].Role)
@@ -106,24 +132,32 @@ con.connect((err) => {
                      var  employeeid = PTOUserData[j].EmployeeId;
                      let vd = PTODATA[i].VacationPerYear;
                      let pd = PTODATA[i].PersonalPerYear;
-                     let sd =  PTODATA[i].SickPerYear;
+                     let sd =  PTODATA[i].SickPerYear;*/
 
+/*
 
                      var insertStatement =
                          `INSERT INTO ptoBalance values(?, ?, ?, ?)`;
                      var items = [employeeid,vd,pd,sd];
 
-                    if(totalYearsCount === PTODATA[i].NumberOfYears)
+                    if(totalYearsCount == PTODATA[i].NumberOfYears)
                     {
                         con.query(insertStatement, items,
                             (err, results, fields) => {return console.log(err);});
                     }
+                    else if(totalYearsCount <= PTODATA[i].NumberOfYears)
+                    {
+                        con.query(insertStatement, items,
+                            (err, results, fields) => {return console.log(err);});
+                    }
+*/
 
 
                  }
-             }
 
-    }
+
+
+
 });
 
 
