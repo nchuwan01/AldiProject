@@ -9,16 +9,11 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static('public'))
 
-app.get("/testing", function (req, res){
-    res.render("Testing", {date: new Date()});
-})
-
 app.get("/managerStatusPage", function (req, res){
-
     res.render("managerStatusPage");
 })
 
-let port = 3011;
+let port = 3018;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
