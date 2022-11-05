@@ -33,7 +33,7 @@ head
         }
         .main {
             margin-left: 160px; /* Same as the width of the sidenav */
-            padding: 0 10px;
+
         }
         @media screen and (max-height: 450px) {
             .sidebar {padding-top: 15px;}
@@ -54,16 +54,16 @@ head
         i.fa.fa-fw.fa-home
         |  Home
     a(href='#requestPTO')
-        i.fa.fa-fw.fa-wrench
+        i(class="fa-solid fa-calendar-check")
         |  Request PTO
     a(href='#statuses')
-        i.fa.fa-fw.fa-user
+        i(class="fa-solid fa-bars-progress")
         |  Statuses
     a(href='#employeeReport')
         i.fa.fa-fw.fa-envelope
         |  Employee Report
     a(href='#printReport')
-        i.fa.fa-fw.fa-envelope
+        i(class="fa-solid fa-file")
         |  Print Report
 nav.navbar.navbar-expand-sm(id="navbar")
     .container-fluid
@@ -74,4 +74,23 @@ nav.navbar.navbar-expand-sm(id="navbar")
                 a.dropdown-item(href='#') Logout
 
 .main
-    h2 Inside main content
+    table.table.table-striped
+        thead.table-dark
+            tr
+                td Dates
+                td Days Off
+                td Status
+                td Details
+        tbody
+            tr
+                td Data
+                td Data
+                td Data
+                td
+                    button.btn.btn-outline-dark(type='button') Details
+            tr
+                td Data
+                td Data
+                td Data
+                td
+                    button.btn.btn-outline-dark(type='button') Details
