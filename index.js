@@ -10,11 +10,16 @@ app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist
 app.use(express.json())
 
 
-app.get("/managerStatusPage", function (req, res){
-    res.render("managerStatusPage")
+app.get("/testing", function (req, res){
+    res.render("Testing", {date: new Date()});
 })
 
-let port = 3000;
+app.get("/managerStatusPage", function (req, res){
+
+    res.render("managerStatusPage");
+})
+
+let port = 3011;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
