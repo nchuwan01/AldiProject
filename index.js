@@ -1,14 +1,13 @@
 const express = require('express')
-const con = require('./db')
+const con = require('./public/js/db')
 const app = express()
-app.set('view engine', 'pug');
 let bodyParser = require('body-parser')
-const path = require("path");
+
+app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")))
 app.use(express.json())
-
+app.use(express.static('public'))
 
 app.get("/testing", function (req, res){
     res.render("Testing", {date: new Date()});
