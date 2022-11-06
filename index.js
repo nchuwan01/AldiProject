@@ -12,6 +12,15 @@ app.use(express.static('public'))
 app.get("/managerStatusPage", function (req, res){
     res.render("managerStatusPage");
 })
+app.get("/devStatusPage", function (req, res){
+    res.render("devStatusPage")
+})
+app.get("/managerPrintReport", function (req, res){
+    res.render("managerPrintReport")
+})
+// app.get("/devPrintReport", function (req, res){
+//     res.render("devPrintReport")
+// })
 
 let port = 3018;
 app.listen(port, ()=>{
