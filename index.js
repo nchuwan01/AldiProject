@@ -18,9 +18,12 @@ app.get("/devStatusPage", function (req, res){
 app.get("/managerPrintReport", function (req, res){
     res.render("managerPrintReport")
 })
-// app.get("/devPrintReport", function (req, res){
-//     res.render("devPrintReport")
-// })
+app.get("/managerEmployeeReport", function (req, res){
+    res.render("managerEmployeeReport")
+})
+app.get("/directorEmployeeReport", function (req, res){
+    res.render("directorEmployeeReport")
+})
 
 let port = 3018;
 app.listen(port, ()=>{

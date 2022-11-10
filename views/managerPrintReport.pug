@@ -52,7 +52,7 @@ head
 
         .box {
             background-color: lightgrey;
-            width: 300px;
+            width: 600px;
             border: 15px gray;
             padding: 50px;
             margin: 20px;
@@ -89,5 +89,14 @@ nav.navbar.navbar-expand-sm(id="navbar")
                 a.dropdown-item(href='#') Logout
 
 .main
+
     .box
-        input(type="button" value="Print Report")
+        .form-check
+            input#flexRadioDefault1.form-check-input(type='radio' name='flexRadioDefault')
+            label.form-check-label(for='flexRadioDefault1')
+                | Personal
+        .form-check
+            input#flexRadioDefault2.form-check-input(type='radio' name='flexRadioDefault' checked='')
+            label.form-check-label(for='flexRadioDefault2')
+                | Team Member
+
