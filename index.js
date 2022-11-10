@@ -21,6 +21,9 @@ app.get("/managerPrintReport", function (req, res){
 app.get("/managerEmployeeReport", function (req, res){
     res.render("managerEmployeeReport")
 })
+app.get("/directorEmployeeReport", function (req, res){
+    res.render("directorEmployeeReport")
+})
 
 let port = 3000;
 app.listen(port, ()=>{
