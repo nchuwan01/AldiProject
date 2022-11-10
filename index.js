@@ -18,6 +18,9 @@ app.get("/devStatusPage", function (req, res){
 app.get("/managerPrintReport", function (req, res){
     res.render("managerPrintReport")
 })
+app.get("/managerEmployeeReport", function (req, res){
+    res.render("managerEmployeeReport")
+})
 
 let port = 3000;
 app.listen(port, ()=>{
