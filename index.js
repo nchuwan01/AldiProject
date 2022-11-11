@@ -31,6 +31,9 @@ app.get("/directorHomePage", function(req, res) {
 app.get("/makeRequest", function(req, res) {
     res.render("RequestPage");
 })
+app.get("/devmakeRequest", function(req, res) {
+    res.render("devRequestPage");
+})
 let port = 3018;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
