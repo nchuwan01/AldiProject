@@ -91,12 +91,16 @@ nav.navbar.navbar-expand-sm(id="navbar")
 .main
 
     .box
-        .form-check
-            input#flexRadioDefault1.form-check-input(type='radio' name='flexRadioDefault')
-            label.form-check-label(for='flexRadioDefault1')
-                | Personal
-        .form-check
-            input#flexRadioDefault2.form-check-input(type='radio' name='flexRadioDefault' checked='')
-            label.form-check-label(for='flexRadioDefault2')
-                | Team Member
-
+        form.w3-container.w3-card-4
+            h2 Print Report
+            p
+                input.w3-radio(type='radio' name='personal' value='Personal' checked='')
+                label Personal
+            p
+                input.w3-radio(type='radio' name='team member' value='Team Member')
+                label Team Member
+            P
+                label(class="w3-text-teal")
+                input(class="w3-input w3-border w3-light-grey" type="text" value="Enter employee ID")
+            P
+                button(class="w3-btn w3-blue") Print Report

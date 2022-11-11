@@ -18,6 +18,9 @@ app.get("/devStatusPage", function (req, res){
 app.get("/managerPrintReport", function (req, res){
     res.render("managerPrintReport")
 })
+app.get("/directorPrintReport", function (req, res){
+    res.render("directorPrintReport")
+})
 app.get("/managerEmployeeReport", function (req, res){
     res.render("managerEmployeeReport")
 })
