@@ -1,10 +1,12 @@
 doctype html
 head
+    title Manager Status
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js')
     link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet')
     script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
+    link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
     style.
         body {
@@ -62,7 +64,7 @@ head
     a(href='#employeeReport')
         i.fa.fa-fw.fa-envelope
         |  Employee Report
-    a(href='#printReport')
+    a(href="/managerPrintReport")
         i(class="fa-solid fa-file")
         |  Print Report
 nav.navbar.navbar-expand-sm(id="navbar")
@@ -87,10 +89,12 @@ nav.navbar.navbar-expand-sm(id="navbar")
                 td Data
                 td Data
                 td
-                    button.btn.btn-outline-dark(type='button') Details
-            tr
-                td Data
-                td Data
-                td Data
-                td
-                    button.btn.btn-outline-dark(type='button') Details
+                    button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                    #id01.w3-modal
+                        .w3-modal-content
+                            header.w3-container.w3-white
+                                span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                h2 Comments from Director
+                            .w3-container
+                                p Some text..
+                                p Some text..
