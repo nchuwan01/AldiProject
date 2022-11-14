@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.static('public'))
 
 
-app.get("/logIn", function (req, res){
+app.get("/", function (req, res){
     res.render("logIn")
 })
 app.get("/registrationPage", function (req, res){
