@@ -14,7 +14,7 @@ head
 div
     #formContent
         h2.active  Sign In
-        button.active(onclick='')  Register
+        button.active(onclick="location.href='/registrationPage'")  Register
         // Icon
         div
             img#icon(src='images/AL_BLR_SQ_MC_RGB.png' alt='User Icon')
@@ -22,7 +22,7 @@ div
         form
             input#login(type='text' name='login' placeholder='login')
             input#password(type='text' name='login' placeholder='password')
-            input(type='submit' value='Log In')
         // Remind Passowrd
+        button.active(onclick="location.href='/DirectorHomePAge'")  Log in
         #formFooter
-            a.underlineHover(href='#') Forgot Password?
+            a.underlineHover(href='/resetPassword') Forgot Password?

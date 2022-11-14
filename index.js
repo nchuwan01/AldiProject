@@ -11,6 +11,12 @@ app.use(express.static('public'))
 app.get("/logIn", function (req, res){
     res.render("logIn")
 })
+app.get("/registrationPage", function (req, res){
+    res.render("registrationPage")
+})
+app.get("/resetPassword", function (req, res){
+    res.render("resetPassword")
+})
 app.get("/managerStatusPage", function (req, res){
     res.render("managerStatusPage");
 })
