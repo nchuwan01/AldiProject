@@ -34,6 +34,10 @@ app.get("/makeRequest", function(req, res) {
 app.get("/devmakeRequest", function(req, res) {
     res.render("devRequestPage");
 })
+app.get("/devHomePage",function (req,res){
+    res.render("/devHomePage");
+})
+
 let port = 3018;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
