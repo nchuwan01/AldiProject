@@ -1,6 +1,6 @@
 doctype html
 head
-    title Dev Report
+    title Manager Report
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js')
@@ -8,24 +8,36 @@ head
     script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
 
     style.
+
         .box {
             background-color: lightgrey;
-            width: 300px;
+            width: 600px;
             border: 15px gray;
             padding: 50px;
             margin: 20px;
             display: flex;
             justify-content: center;
         }
-
-        .main {
+        .main{
+            margin-left: 160px;
             display: flex;
             justify-content: center;
         }
 
-    include includes/sideBar
-
+    include ../includes/sideBar
 .main
+
     .box
-        input(type="button" value="Print Report")
-        test test
+        form.w3-container.w3-card-4
+            h2 Print Report
+            p
+                input.w3-radio(type='radio' name='report' value='Personal' checked='')
+                label Personal
+            p
+                input.w3-radio(type='radio' name='report' value='Team Member')
+                label Team Member
+            P
+                label(class="w3-text-teal")
+                input(class="w3-input w3-border w3-light-grey" type="text" value="Enter employee ID")
+            P
+                button(class="w3-btn w3-blue") Print Report
