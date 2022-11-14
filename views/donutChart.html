@@ -1,0 +1,22 @@
+<canvas id="myChart" width="400" height="150">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script type="text/javascript">
+        var ctx= document.getElementById("myChart")
+        var myChart = new Chart(ctx,{
+            type:'doughnut',
+            data:{
+                labels:['used','available'],
+                datasets:[{
+                    label:'PTO',
+                    data:[20,30],
+                    backgroundColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(255,99,132,1)'
+                    ]
+
+                }]
+            }
+        });
+    </script>
+</canvas>
