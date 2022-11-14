@@ -1,0 +1,73 @@
+style.
+    body {
+        font-family: "Lato", sans-serif;
+    }
+    .sidebar {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #e1e1eb;
+        overflow-x: hidden;
+        padding-top: 16px;
+    }
+    .sidebar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #000000;
+        display: block;
+    }
+
+    #startDate, #endDate,#selectPTO{
+        margin: 5% 5%;
+        height: 70px;
+        width: 150px;
+    }
+    #commentBox{
+        padding: 1% 1%;
+        height: 100px;
+        width: 400px;
+    }
+
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+    .main {
+        margin-top: 10%;
+        margin-left: 160px; /* Same as the width of the sidenav */
+        text-align: center;
+    }
+    @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+    }
+    .navbar{
+        margin-left: 160px;
+    }
+    #dropdown{
+        color: white;
+    }
+    #navbar{
+        background-color: #00b4dc;
+    }
+
+.sidebar
+    a(href='#home')
+        i.fa.fa-fw.fa-home
+        |  Home
+    a(href='/devmakeRequest')
+        i(class="fa-solid fa-calendar-check")
+        |  Request PTO
+    a(href='/devStatusPage')
+        i(class="fa-solid fa-bars-progress")
+        |  Statuses
+nav.navbar.navbar-expand-sm(id="navbar")
+    .container-fluid
+        a.navbar-brand
+            img(src="../../images/ASG_APP_AID_36x36.png" alt="image")
+            a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' id="dropdown") Employee Name
+            .dropdown-menu.dropdown-menu-end
+                a.dropdown-item(href='#') Logout
