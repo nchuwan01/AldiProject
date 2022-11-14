@@ -7,6 +7,10 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static('public'))
 
+
+app.get("/logIn", function (req, res){
+    res.render("logIn")
+})
 app.get("/managerStatusPage", function (req, res){
     res.render("managerStatusPage");
 })
