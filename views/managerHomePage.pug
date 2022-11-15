@@ -21,12 +21,6 @@ head
         .btn-info {
             margin: 1% 1%;
         }
-        .box{
-
-            padding-top: 10%;
-            height:100px;
-            width: 100px;
-        }
         .container {
             display:grid;
         }
@@ -37,25 +31,38 @@ head
             padding-right:20%;
             text-align-all: left;
             display: grid;
-            rid-gap:15px;
+            grid-gap:15px;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:  1fr 1fr 1fr 1fr;
             grid-template-rows:2fr;
             grid-template-areas:
-            "date date goRequest"
+            "requestPending date goRequest"
         ;
         }
+        .requestPending{
+            grid-gap:15px;
+            padding: 10%;
+            text-align: center;
+            border-radius: 25px;
+            background: grey;
+
+            width: 200px;
+            height: 150px;
+        }
         .date {
+            grid-gap:15px;
+            padding: 10%;
             align-content: center;
             text-align: start;
             border-radius: 25px;
             background: grey;
-            padding: 20px;
             width: 400px;
             height: 150px;
 
             grid-area: date}
         .goRequest{
+
+            padding: 10%;
             align-content: center;
             border-radius: 25px;
             border-color: black;
@@ -99,21 +106,21 @@ include includes/sideBar
                 }]
             }
         });
-            var ctx2= document.getElementById("doughnut2")
-            var myChart2 = new Chart(ctx2, {
+        var ctx2= document.getElementById("doughnut2")
+        var myChart2 = new Chart(ctx2, {
             type: 'doughnut',
-                            data: {
-                                labels: ['used', 'available'],
-                                datasets: [{
-                                    label: 'VTO',
-                                    data: [10, 50],
-                                    backgroundColor: [
-                                        'rgba(100,255,0,1)',
-                                        'rgba(0,100,255,1)'
-                                    ]
-                                }]
-                            }
-                        });
+            data: {
+                labels: ['used', 'available'],
+                datasets: [{
+                    label: 'VTO',
+                    data: [10, 50],
+                    backgroundColor: [
+                        'rgba(100,255,0,1)',
+                        'rgba(0,100,255,1)'
+                    ]
+                }]
+            }
+        });
         var ctx3 = document.getElementById("doughnut3")
         var myChart3 = new Chart(ctx3, {
             type: 'doughnut',
@@ -130,6 +137,9 @@ include includes/sideBar
             }
         });
     .container2
+        .requestPending
+            h3 !
+            div you have pending requests
         .date
             div Todays Date:11/18/22
             div Hire Date:11/11/22
