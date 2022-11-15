@@ -8,9 +8,6 @@ head
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js")
 
     style.
-        canvas{
-            align-self: start;
-        }
         .main {
             margin-top: 10%;
             margin-left: 160px; /* Same as the width of the sidenav */
@@ -24,28 +21,71 @@ head
         .btn-info {
             margin: 1% 1%;
         }
+        .chartCard{
+
+        }
+
 
 include includes/sideBar
 
 .main
-    h1 hello
-    canvas#myChart(width='900' height='150')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js')
-        script(type='text/javascript').
-            var ctx = document.getElementById("myChart")
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['used', 'available'],
-                    datasets: [{
-                        label: 'PTO',
-                        data: [20, 30],
-                        backgroundColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(100,99,132,1)'
-                        ]
-                    }]
-                }
-            });
+    .container
+        .row
+            .col-lg-4.col-md-12
+                h1 SickDays
+                canvas#doughnut1
+            .col-lg-4.col-md-6
+                h1 VacationDays
+                canvas#doughnut2
+            .col-lg-4.col-md-6
+                h1 PersonalDays
+                canvas#doughnut3
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js')
+    script(type='text/javascript').
+        var ctx = document.getElementById("doughnut1")
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['used', 'available'],
+                datasets: [{
+                    label: 'PTO',
+                    data: [20, 30],
+                    backgroundColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(100,99,132,1)'
+                    ]
+                }]
+            }
+        });
+            var ctx2= document.getElementById("doughnut2")
+            var myChart2 = new Chart(ctx2, {
+            type: 'doughnut',
+                            data: {
+                                labels: ['used', 'available'],
+                                datasets: [{
+                                    label: 'VTO',
+                                    data: [10, 50],
+                                    backgroundColor: [
+                                        'rgba(100,255,0,1)',
+                                        'rgba(0,100,255,1)'
+                                    ]
+                                }]
+                            }
+                        });
+        var ctx3 = document.getElementById("doughnut3")
+        var myChart3 = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['used', 'available'],
+                datasets: [{
+                    label: 'SD',
+                    data: [1, 8],
+                    backgroundColor: [
+                        'rgba(0,255,255,1)',
+                        'rgba(10,98,0,1)'
+                    ]
+                }]
+            }
+        });
 
-    h3 canvas over
+
