@@ -2,6 +2,7 @@
 style.
     body {
         font-family: "Lato", sans-serif;
+        background-color: #E1E1EB;
     }
     .sidebar {
         height: 100%;
@@ -43,19 +44,20 @@ style.
     }
 
 .sidebar
-    a(href='#home')
+    a(href='/directorHomePage')
         i.fa.fa-fw.fa-home
         |  Home
-    a(href='/devmakeRequest')
-        i(class="fa-solid fa-calendar-check")
-        |  Request PTO
-    a(href='/devStatusPage')
-        i(class="fa-solid fa-bars-progress")
-        |  Statuses
+    a(href='/directorPrintReport')
+        i.fa.fa-fw.fa-home
+        |  Print Report
+    a(href='/directorEmployeeReport')
+        i.fa.fa-fw.fa-home
+        |  Employee Report
+
 nav.navbar.navbar-expand-sm(id="navbar")
     .container-fluid
         a.navbar-brand
             img(src="../../images/ASG_APP_AID_36x36.png" alt="image")
             a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' id="dropdown") Employee Name
             .dropdown-menu.dropdown-menu-end
-                a.dropdown-item(href='#') Logout
+                a.dropdown-item(href='/logIn') Logout

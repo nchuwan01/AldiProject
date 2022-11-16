@@ -1,0 +1,66 @@
+
+style.
+    body {
+        font-family: "Lato", sans-serif;
+        background-color: #E1E1EB;
+    }
+    .sidebar {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #e1e1eb;
+        overflow-x: hidden;
+        padding-top: 16px;
+    }
+    .sidebar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #000000;
+        display: block;
+    }
+
+
+
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+    }
+    .navbar{
+        margin-left: 160px;
+    }
+    #dropdown{
+        color: white;
+    }
+    #navbar{
+        background-color: #00b4dc;
+    }
+
+.sidebar
+    a(href='/managerHomePage')
+        i.fa.fa-fw.fa-home
+        |  Home
+    a(href='/makeRequest')
+        i(class="fa-solid fa-calendar-check")
+        |  Request PTO
+    a(href='/managerStatusPage')
+        i(class="fa-solid fa-bars-progress")
+        |  Statuses
+    a(href='/managerEmployeeReport')
+        i(class="fa-solid fa-bars-progress")
+        |  Employee Report
+
+nav.navbar.navbar-expand-sm(id="navbar")
+    .container-fluid
+        a.navbar-brand
+            img(src="../../images/ASG_APP_AID_36x36.png" alt="image")
+            a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' id="dropdown") Employee Name
+            .dropdown-menu.dropdown-menu-end
+                a.dropdown-item(href='/logIn') Logout
