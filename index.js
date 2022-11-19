@@ -49,7 +49,7 @@ app.get("/resetPassword", function (req, res){
 app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
-let port = 3019;
+let port = 3021;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
