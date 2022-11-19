@@ -1,20 +1,10 @@
 
 style.
     body {
-        font-family: "Lato", sans-serif;
+        font-family: "Arial", sans-serif;
         background-color: #E1E1EB;
     }
-    .sidebar {
-        height: 100%;
-        width: 160px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #e1e1eb;
-        overflow-x: hidden;
-        padding-top: 16px;
-    }
+
     .sidebar a {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
@@ -33,31 +23,173 @@ style.
         .sidebar {padding-top: 15px;}
         .sidebar a {font-size: 18px;}
     }
-    .navbar{
-        margin-left: 160px;
-    }
-    #dropdown{
-        color: white;
-    }
-    #navbar{
-        background-color: #00b4dc;
+
+
+    #imgInfo
+    {
+        display: inline-block;
+        height: 25%;
+        width: 6%;
     }
 
-.sidebar
-    a(href='/directorHomePage')
-        i.fa.fa-fw.fa-home
-        |  Home
-    a(href='/directorPrintReport')
-        i.fa.fa-fw.fa-file
-        |  Print Report
-    a(href='/directorEmployeeReport')
-        i.fa.fa-fw.fa-list-check
-        |  Employee Report
 
-nav.navbar.navbar-expand-sm(id="navbar")
-    .container-fluid
-        a.navbar-brand
-            img(src="../../images/ASG_APP_AID_36x36.png" alt="image")
-            a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' id="dropdown") Employee Name
-            .dropdown-menu.dropdown-menu-end
-                a.dropdown-item(href='/logIn') Logout
+    .container-fluid a p{
+        position: absolute;
+
+        bottom: 0;
+    }
+
+    .navi
+    {
+        background-color: #d6efff;
+        position: relative;
+        padding-top: .2%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .topRightNav{
+        padding: 2px 2px 2px 2px;
+        display: flex;
+    }
+    i
+    {
+        position: absolute;
+        bottom: 30%;
+    }
+    .buttonNav
+    {
+        margin-left: 10px;
+    }
+    .inRight
+    {
+        padding-left:10px;
+        color: black;
+    }
+    .infoNav
+    {
+        display: flex;
+        padding-left: 50px;
+        padding-right: 20px;
+    }
+
+    .name
+    {
+        padding-top: 8px;
+        padding-right: 5px;
+
+    }
+    .iconExit
+    {
+        margin-top: 5px;
+        size: 50px;
+    }
+
+    .main {
+        margin-top: 1%;
+    }
+    .bars {
+        color: black;
+    }
+    .bars:hover
+    {
+        font-size: 20px;
+    }
+    .inRight:hover,.buttonNav:hover
+    {
+        color: blue;
+        cursor: pointer;
+    }
+
+
+div.navi
+    img#imgInfo(src="../images/AL_BLR_SQ_MC_RGB.png" alt="image")
+    div.bars
+        a.bars(href="/directorHomePage")
+            i(class="fa-solid fa-house")
+                |    Home
+    div.bars
+        a.bars(href="/directorPrintReport")
+            i(class="fa-solid fa-file")
+                |      Print Report
+    div.bars
+        a.bars(href="/directorEmployeeReport")
+            i(class="fa-solid fa-list-check")
+                |      Employee Report
+    div.topRightNav
+        a.inRight
+            p(class="fa-solid fa-lg fa-bell")
+        a.inRight
+            p(class="fa-regular fa-lg fa-comment")
+
+        div
+            div.infoNav
+                p.name Narayan Chuwan
+                    div.buttonNav
+                        a
+                            p.iconExit(class="fa-solid fa-2x fa-right-from-bracket")
+
+
+//
+//style.
+//    body {
+//        font-family: "Lato", sans-serif;
+//        background-color: #E1E1EB;
+//    }
+//    .sidebar {
+//        height: 100%;
+//        width: 160px;
+//        position: fixed;
+//        z-index: 1;
+//        top: 0;
+//        left: 0;
+//        background-color: #e1e1eb;
+//        overflow-x: hidden;
+//        padding-top: 16px;
+//    }
+//    .sidebar a {
+//        padding: 6px 8px 6px 16px;
+//        text-decoration: none;
+//        font-size: 20px;
+//        color: #000000;
+//        display: block;
+//    }
+//
+//
+//
+//    .sidebar a:hover {
+//        color: #f1f1f1;
+//    }
+//
+//    @media screen and (max-height: 450px) {
+//        .sidebar {padding-top: 15px;}
+//        .sidebar a {font-size: 18px;}
+//    }
+//    .navbar{
+//        margin-left: 160px;
+//    }
+//    #dropdown{
+//        color: white;
+//    }
+//    #navbar{
+//        background-color: #00b4dc;
+//    }
+//
+//.sidebar
+//    a(href='/directorHomePage')
+//        i.fa.fa-fw.fa-home
+//        |  Home
+//    a(href='/directorPrintReport')
+//        i.fa.fa-fw.fa-file
+//        |  Print Report
+//    a(href='/directorEmployeeReport')
+//        i.fa.fa-fw.fa-list-check
+//        |  Employee Report
+//
+//nav.navbar.navbar-expand-sm(id="navbar")
+//    .container-fluid
+//        a.navbar-brand
+//            img(src="../../images/ASG_APP_AID_36x36.png" alt="image")
+//            a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' id="dropdown") Employee Name
+//            .dropdown-menu.dropdown-menu-end
+//                a.dropdown-item(href='/logIn') Logout
