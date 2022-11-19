@@ -44,6 +44,14 @@ head
             margin-top: 5%;
             margin-left: 12%;
         }
+        #buttonHover:hover
+        {
+            background-color: #00ffe1;
+
+        }
+        .SelectDivs:hover {
+            size: 200px;
+        }
 
 dev.main
 
@@ -51,7 +59,7 @@ dev.main
        div.word
            h3 Type:
        div
-           select(class="btn btn-secondary dropdown-toggle" id="selectPTO")
+           select.SelectDivs(class="btn btn-secondary dropdown-toggle" id="selectPTO")
                 option Vacation
                 option Personal
                 option Sick
@@ -60,15 +68,15 @@ dev.main
        div.word
            h3 Start Date:
        div
-            input(type="date" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
+            input.SelectDivs(type="date" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
    div.type
        div.word
            h3 End Date:
        div
-           input(type="date" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
+           input.SelectDivs(type="date" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
 div.submitInfo
     div.commentBox
-        textarea(id="commentBox" maxlength=150)
+        textarea(id="commentBox" placeholder="Leave a comment" maxlength=150)
 
     div.Submit
-        button(type="submit" alt="Comment" class="btn btn-secondary btn-lg") Make Request
+        button(type="submit" id="buttonHover" alt="Comment"  class="btn btn-secondary btn-lg") Make Request
