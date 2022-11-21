@@ -17,16 +17,91 @@ head
         {
             margin: 1% 1%;
         }
+        table
+        {
+            width: 40%;
+        }
+        table,th,td
+        {
+            border: 1px solid;
 
-    include ../includes/DirectorSideBar
+        }
+
+        .tableDiv
+        {
+            width: 90%;
+            border: 1px solid;
+            display: inline-block;
+            overflow-y: scroll;
+            height: 200px;
+        }
+
+
+include ../includes/DirectorSideBar
 
 
 .main
-    button(type="button" class="btn btn-primary btn-lg" id="welcomeButton") Welcome, Dave. You Have Paid Time Off Request From Managers!
+    h1(type="button" class="btn btn-primary btn-lg" id="welcomeButton") Welcome, Dave. You Have Paid Time Off Request From Managers!
     br
-    button(type="button" class="btn btn-info") See request from Lena
-    br
-    button(type="button" class="btn btn-info") See request from Luis
-    br
-    button(type="button" class="btn btn-info") See request from Jenny
+    div.tableDiv
+        table(class="table table-striped")
+            tr
+                th(style="Width: 15%") Employee ID
+                th(style="Width: 10%") First Name
+                th(style="Width: 10%") Last Name
+                th(style="Width: 10%") PTO Left
+                th(style="Width: 5%") View Detail
+
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5 tr
+                td
+                    button(class="btn btn-secondary") Detail
+
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+            tr
+                td 5000
+                td June
+                td Smith
+                td 5
+                td
+                    button(class="btn btn-secondary") Detail
+
+
 
