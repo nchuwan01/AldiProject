@@ -37,18 +37,21 @@ app.post('/auth',function (req,res){
                 req.session.username = username;
                 // Redirect to home page
                 connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
+                    console.log(results);
                     if (error) throw error;
                     if(results=="Employee"){
-                    res.render("dev/devHomePage")
+                        res.render("dev/devHomePage")
+                        res.end();
                     }else if(results == "Manager"){
-                    res.render("ManagerFiles/managerHomePage")
+                        res.render("ManagerFiles/managerHomePage")
+                        res.end();
                     }else{
                     res.render("DirectorPages/DirectorHomePage")
                     }});
             }  else {
                 res.send('Incorrect Username and/or Password!');
             }
-            res.end();
+
         });
     } else {
         console.log(username,password)
