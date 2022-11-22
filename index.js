@@ -25,17 +25,18 @@ app.get('/', function(req, res) {
 app.post('/auth',function (req,res){
     let username = req.body.username
     let password = req.body.password
+    console.log(username,password)
     if(username && password){
-        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        connection.query('SELECT * FROM login WHERE employeeid = ? AND password = ?', [username, password], function(error, results, fields) {
         // If there is an issue with the query, output the error
             if (error) throw error;
             // If the account exists
             if (results.length > 0) {
                 // Authenticate the user
-                request.session.loggedin = true;
-                request.session.username = username;
+                req.session.loggedin = true;
+                req.session.username = username;
                 // Redirect to home page
-                connection.query('SELECT role FROM employee WHERE username = ?',[req.body.username],function(error,results,fields){
+                connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
                     if (error) throw error;
                     if(results=="Employee"){
                     res.render("dev/devHomePage")
