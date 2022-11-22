@@ -6,10 +6,23 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static('public'))
+const session = require('express-session');
+const path = require('path');
+const mysql = require('mysql');
+let connection = require ("./dbLogin");
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(express.static(path.join(__dirname, 'static')))
 
-app.get("/logIn", function (req, res){
-    res.render("logIn")
-})
+
+app.get('/', function(req, res) {
+    // Render login template
+    res.render("login")
+});
+
 app.get("/managerStatusPage", function (req, res){
     res.render("ManagerFiles/managerStatusPage");
 })
