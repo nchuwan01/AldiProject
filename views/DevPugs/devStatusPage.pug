@@ -8,10 +8,6 @@ head
     script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
     link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
-
-    style.
-
-
     include ../includes/EmpSideBar
 .main
     table.table.table-striped
@@ -22,16 +18,16 @@ head
                 td Status
                 td Details
         tbody
-            tr
-                td Data
-                td Data
-                td Data
-                td
-                    button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
-                    #id01.w3-modal
-                        .w3-modal-content
-                            header.w3-container.w3-white
-                                span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
-                                h2 Comments from Manager
-                            .w3-container
-                                p Comment
+            each row in rows
+                tr
+                    td #{row.startDate} to #{row.endDate}
+                    td #{row.numDaysOff}
+                    td #{row.requestStatus}
+                    td
+                        button.w3-button.w3-black(onclick=`document.getElementById(${row.requestid}).style.display='block'`) Details
+                        div(id=`${row.requestid}` class="w3-modal")
+                            .w3-modal-content
+                                .w3-container
+                                    span.w3-button.w3-display-topright(onclick=`document.getElementById(${row.requestid}).style.display='none'`) &times;
+                                    h1 Comment From Manager
+                                    p #{row.commentRequest}
