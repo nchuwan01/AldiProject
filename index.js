@@ -35,18 +35,25 @@ app.post('/auth',function (req,res){
                 // Authenticate the user
                 req.session.loggedin = true;
                 req.session.username = username;
+
+
+
                 // Redirect to home page
                 connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
                     console.log(results);
+                    var string = JSON.stringify(results);
+                    console.log('>> string: ', string);
+                    var json = JSON.parse(string);
+                    console.log(json[0].role);
                     if (error) throw error;
-                    if(results=="Employee"){
-                        res.render("dev/devHomePage")
+                    if(json[0].role==="Employee"){
+                        res.render("DevPugs/devHomePage")
                         res.end();
-                    }else if(results == "Manager"){
+                    }else if(json[0].role == "Manager"){
                         res.render("ManagerFiles/managerHomePage")
                         res.end();
                     }else{
-                    res.render("DirectorPages/DirectorHomePage")
+                        res.render("DirectorPages/DirectorHomePage")
                     }});
             }  else {
                 res.send('Incorrect Username and/or Password!');
@@ -99,7 +106,7 @@ app.get("/resetPassword", function (req, res){
 app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
-let port = 3021;
+let port = 3023;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
