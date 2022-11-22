@@ -25,29 +25,40 @@ app.get('/', function(req, res) {
 app.post('/auth',function (req,res){
     let username = req.body.username
     let password = req.body.password
+    console.log(username,password)
     if(username && password){
-        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        connection.query('SELECT * FROM login WHERE employeeid = ? AND password = ?', [username, password], function(error, results, fields) {
         // If there is an issue with the query, output the error
             if (error) throw error;
             // If the account exists
             if (results.length > 0) {
                 // Authenticate the user
-                request.session.loggedin = true;
-                request.session.username = username;
+                req.session.loggedin = true;
+                req.session.username = username;
+
+
+
                 // Redirect to home page
-                connection.query('SELECT role FROM employee WHERE username = ?',[req.body.username],function(error,results,fields){
+                connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
+                    console.log(results);
+                    var string = JSON.stringify(results);
+                    console.log('>> string: ', string);
+                    var json = JSON.parse(string);
+                    console.log(json[0].role);
                     if (error) throw error;
-                    if(results=="Employee"){
-                    res.render("dev/devHomePage")
-                    }else if(results == "Manager"){
-                    res.render("ManagerFiles/managerHomePage")
+                    if(json[0].role==="Employee"){
+                        res.render("DevPugs/devHomePage")
+                        res.end();
+                    }else if(json[0].role == "Manager"){
+                        res.render("ManagerFiles/managerHomePage")
+                        res.end();
                     }else{
-                    res.render("DirectorPages/DirectorHomePage")
+                        res.render("DirectorPages/DirectorHomePage")
                     }});
             }  else {
                 res.send('Incorrect Username and/or Password!');
             }
-            res.end();
+
         });
     } else {
         console.log(username,password)
@@ -95,7 +106,7 @@ app.get("/resetPassword", function (req, res){
 app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
-let port = 3021;
+let port = 3023;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
