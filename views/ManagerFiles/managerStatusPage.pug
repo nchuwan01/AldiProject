@@ -20,16 +20,15 @@ head
                 td Status
                 td Details
         tbody
-            tr
-                td 11-23-22 to 11-25-22
-                    td 3
-                    td Denied
-                    td
-                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
-                        #id01.w3-modal
-                            .w3-modal-content
-                                header.w3-container.w3-white
-                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
-                                    h2 Comments from Director
-                                .w3-container
-                                    p Will need you for this Thanksgiving...
+            each row in rows
+                tr
+                    td #{row.startDate} to #{row.endDate}
+                    td #{row.numDaysOff}
+                    td #{row.requestStatus}
+                        button.w3-button.w3-black(onclick=`document.getElementById(${row.requestid}).style.display='block'`) Details
+                            div(id=`${row.requestid}` class="w3-modal")
+                                .w3-modal-content
+                                    .w3-container
+                                        span.w3-button.w3-display-topright(onclick=`document.getElementById(${row.requestid}).style.display='none'`) &times;
+                                        h1 Comment From Director
+                                        p #{row.commentRequest}
