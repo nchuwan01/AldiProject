@@ -12,7 +12,12 @@ app.get("/logIn", function (req, res){
     res.render("logIn")
 })
 app.get("/managerStatusPage", function (req, res){
-    res.render("ManagerFiles/managerStatusPage");
+    let sql = `SELECT * FROM request where employeeid = 817052`
+    con.query(sql, function (error, results){
+        res.render("ManagerFiles/managerStatusPage", {
+            rows : results
+        })
+    })
 })
 app.get("/devStatusPage", function (req, res){
     let sql = `SELECT * FROM request where employeeid = 936350`
