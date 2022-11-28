@@ -10,6 +10,20 @@ head
     link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
     link(rel='stylesheet' href='css/AldiLogIn.css')
     .login
+        script.
+             check = function () {
+                    if (document.getElementById('pass').value ===
+                        document.getElementById('passConfirm').value) {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById("loginButton").disabled = false;
+
+                        document.getElementById('message').innerHTML = 'Password matching';
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById("loginButton").disabled = true;
+                        document.getElementById('message').innerHTML = 'Password not matching';
+                    }
+                }
         form(action='/reset' method='post')
             #formContent
                 // Icon
@@ -19,27 +33,26 @@ head
                 br
                 div(style="display: inline")
                     p.icons(class="fa-solid fa-user")
-                    input#username(type='text' name='username' class="fontAwesome" placeholder='ID Number')
+                    input#username(type='number' name='username' placeholder='ID Number' minlength="6" maxlength="6" required)
                 br
                 br
                 div(style="display: inline")
                     p.icons(class="fa-solid fa-envelope")
-                    input#password(type='password' name='password' placeholder='Enter Work email')
+                    input#password(type='email' name='email' placeholder='Enter Your Aldi Email' pattern=".+@Aldi.us" required)
                 // Remind Passowrd
                 br
                 br
                 div(style="display: inline")
                     p.icons(class="fa-solid fa-key")
-                    input.password(type='password' name='password' placeholder='New Password')
-                // Remind Passowrd
+                    input.password(type='password' id="pass" name='password' minlength="8" onkeyup='check();' placeholder='New Password' required)
+                // Remind Password
                 br
                 br
                 div(style="display: inline")
                     p.icons(class="fa-solid fa-key")
-                    input.password(type='password' name='password' placeholder='Confirm Password')
+                    input.password(type='password' id="passConfirm" name='password' minlength="8" onkeyup='check();' placeholder='Confirm Password' required)
+                    p#message
                 // Remind Passowrd
-                br
-                br
                 input#loginButton(type='submit' value='Create Account')
                 #formFooter
                     a.underlineHover(href='/') Back to Login
