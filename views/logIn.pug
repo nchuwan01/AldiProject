@@ -9,23 +9,31 @@ head
     link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
     link(rel='stylesheet' href='css/AldiLogIn.css')
 
+
+
+
+
 .login
-    form(action='/auth' method='post')
+
+   form(action='/auth' method='post')
         #formContent
-            h2.active  Sign In
-            button.active(onclick="location.href='/registrationPage'")  Register
             // Icon
             div
                 img#icon(src='images/AL_BLR_SQ_MC_RGB.png' alt='User Icon')
-            // Login Form
+            p.IncorrectPassword=data
+            div(style="display: inline")
+                p.icons(class="fa-solid fa-user")
+                input#username(type='text' name='username' class="fontAwesome" maxlength="6" placeholder='ID Number' required)
             br
-            form
-                input#username(type='text' name='username' placeholder='login')
-                br
-                br
-                input#password(type='text' name='password' placeholder='password')
+            br
+            div(style="display: inline")
+                p.icons(class="fa-solid fa-key")
+                input#password(type='password' name='password' placeholder='Password' minlength="1" required)
             // Remind Passowrd
             br
-            input(type='submit' value='Login')
-            #formFooter
+            br
+            input#loginButton(type='submit' value='Login')
+            div.formFooter
                 a.underlineHover(href='/resetPassword') Forgot Password?
+                br
+                a.underlineHover(href='/registrationPage') Sign Up?

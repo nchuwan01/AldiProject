@@ -22,6 +22,8 @@ app.get('/', function(req, res) {
     // Render login template
     res.render("login")
 });
+
+
 app.post('/auth',function (req,res){
     let username = req.body.username
     let password = req.body.password
@@ -56,7 +58,9 @@ app.post('/auth',function (req,res){
                         res.render("DirectorPages/DirectorHomePage")
                     }});
             }  else {
-                res.send('Incorrect Username and/or Password!');
+                res.render("login", {data: "Incorrect Employee ID/Password"})
+
+               // res.send('Incorrect Username and/or Password!');
             }
 
         });
@@ -67,6 +71,7 @@ app.post('/auth',function (req,res){
         res.end();
     }
 });
+
 app.get("/managerStatusPage", function (req, res){
     res.render("ManagerFiles/managerStatusPage");
 })

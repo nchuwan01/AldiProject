@@ -6,9 +6,25 @@
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color: #56baed;
+    background-image: url("https://corporate.aldi.us/fileadmin/fm-dam/Corporate_Redesign/ALDI_AboutUs_Hero_Desktop.jpg");
+    background-size: cover; /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
+.icons
+{
+    margin-right: 2%;
+}
+
+
+.login {
+    padding-top: 3%;
+}
+.IncorrectPassword
+{
+    color: red;
+}
 a {
     color: #92badd;
     display:inline-block;
@@ -27,18 +43,11 @@ h2 {
 }
 
 
-
-
-
 #formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    padding: 0px;
+    border-radius: 5%;
+    background: rgba(255,255,255,0.95);
+    padding: 5%;
+    width: 60%;
     text-align: center;
 }
 
@@ -54,22 +63,7 @@ h2.active {
     color: #0d0d0d;
     border-bottom: 2px solid #5fbae9;
 }
-button.active{
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
-    border-top: white;
-    border-right: white;
-    border-left:white;
-    text-align: center;
-    background-color: white;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display:inline-block;
-    margin: 40px 8px 10px 8px;
-    color: black;
 
-}
 form.page2{
     color: #0d0d0d;
     border-bottom: 2px solid #5fbae9;
@@ -121,5 +115,10 @@ div{
     margin: auto;
     /*border: 2px solid #000000;*/
     width: 50%;
+}
+#username, #password
+{
+
+    height: 100%;
 }
 
