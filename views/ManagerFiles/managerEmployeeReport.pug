@@ -8,52 +8,233 @@ head
     script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
     link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
-    style.
 
     include ../includes/ManagerSideBar
 
+    style.
+        .main{
+            width: 80%;
+            padding-left: 20%;
+        }
+
+        .my-custom-scrollbar {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            overflow: auto;
+        }
+
+        .table-wrapper-scroll-y {
+            display: block;
+        }
 
 
 .main
-    table.table.table-striped
-        thead.table-dark
-            tr
-                td ID
-                td Name
-                td Dates
-                td Days Off
-                td Status
-                td Details
-        tbody
-            tr
-                td Data
-                td Data
-                td Data
-                td Data
-                td Data
-                td
-                    button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
-                    #id01.w3-modal
-                        .w3-modal-content
-                            header.w3-container.w3-white
-                                span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
-                                h2 Details
-                            .w3-container
-                                form.w3-container
-                                    .w3-row-padding
-                                        .w3-half
-                                            label Leave Comment
-                                            input.w3-input.w3-border(type='text' placeholder='Comment')
-                                            input.w3-radio(type='radio' name='gender' value='Accept' checked='')
-                                            label Accept
-                                            p
-                                            p
-                                            input.w3-radio(type='radio' name='gender' value='Deny')
-                                            label Deny
-                                            P
-                                            P
-                                            button(class="w3-btn w3-blue") Send
+    #tableData(class="table-wrapper-scroll-y my-custom-scrollbar")
+        table.table.table-striped(class="table table-bordered table-striped mb-0")
+            thead.table-dark
+                tr
+                    td ID
+                    td Name
+                    td Dates
+                    td Days Off
+                    td Status
+                    td Details
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        #id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
 
-                                        .w3-half
-                                            label Comment from Employee
-                                            input.w3-input.w3-border(type='text' placeholder='Comment')
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        .id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
+
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        .id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
+
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        .id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
+
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        .id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
+
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+            tbody
+                tr
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td Data
+                    td
+                        button.w3-button.w3-black(onclick="document.getElementById('id01').style.display='block'") Details
+                        .id01.w3-modal
+                            .w3-modal-content
+                                header.w3-container.w3-white
+                                    span.w3-button.w3-display-topright(onclick="document.getElementById('id01').style.display='none'") &times;
+                                    h2 Details
+                                .w3-container
+                                    form.w3-container
+                                        .w3-row-padding
+                                            .w3-half
+                                                label Leave Comment
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
+                                                input.w3-radio(type='radio' name='gender' value='Accept' checked='')
+                                                label Accept
+                                                p
+                                                p
+                                                input.w3-radio(type='radio' name='gender' value='Deny')
+                                                label Deny
+                                                P
+                                                P
+                                                button(class="w3-btn w3-blue") Send
+
+                                            .w3-half
+                                                label Comment from Employee
+                                                input.w3-input.w3-border(type='text' placeholder='Comment')
