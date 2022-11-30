@@ -72,18 +72,18 @@ head
             grid-area: goRequest}
 
 include ../includes/ManagerSideBar
-
 .main
+    h1 welcome #{empname}
     .container
         .row
             .col-lg-4.col-md-12
-                h1 SickDays
+                h1 Sick Days
                 canvas#doughnut1
             .col-lg-4.col-md-6
-                h1 VacationDays
+                h1 Vacation Days
                 canvas#doughnut2
             .col-lg-4.col-md-6
-                h1 PersonalDays
+                h1 Personal Days
                 canvas#doughnut3
     script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js')
     script(type='text/javascript').
@@ -133,6 +133,7 @@ include ../includes/ManagerSideBar
             }
         });
     .container2
+
         .requestPending
             h3 !
             div you have pending requests
