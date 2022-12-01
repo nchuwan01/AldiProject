@@ -12,6 +12,16 @@ const mysql = require('mysql');
 let connection = require ("./dbLogin");
 let username ="";
 let name="";
+let date = new Date();
+let day = date.getDate();
+let month = date.getMonth()+1;
+let year = date.getFullYear();
+let hours= date.getHours();
+let minutes=date.getMinutes();
+let seconds= date.getSeconds();
+let mdate=`${year}-${month}-${day}`
+let fullDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -110,10 +120,11 @@ app.get("/managerHomePage", function(req, res) {
         var json = JSON.parse(string);
         console.log(json[0].firstName);
         name =  json[0].firstName;
-        console.log(name)
+        console.log(fullDate);
         if (error) throw error;
         res.render("ManagerFiles/managerHomePage",{
             user: username,
+            date:mdate,
             empname: name});
     })});
 
