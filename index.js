@@ -10,6 +10,18 @@ const session = require('express-session');
 const path = require('path');
 const mysql = require('mysql');
 let connection = require ("./dbLogin");
+let username ="";
+let name="";
+let date = new Date();
+let day = date.getDate();
+let month = date.getMonth()+1;
+let year = date.getFullYear();
+let hours= date.getHours();
+let minutes=date.getMinutes();
+let seconds= date.getSeconds();
+let mdate=`${year}-${month}-${day}`
+let fullDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -25,7 +37,7 @@ app.get('/', function(req, res) {
 
 
 app.post('/auth',function (req,res){
-    let username = req.body.username
+    username = req.body.username
     let password = req.body.password
     console.log(username,password)
     if(username && password){
@@ -49,13 +61,16 @@ app.post('/auth',function (req,res){
                     console.log(json[0].role);
                     if (error) throw error;
                     if(json[0].role==="Employee"){
-                        res.render("DevPugs/devHomePage")
+                        //res.render("DevPugs/devHomePage")
+                        res.redirect("/devHomePage")
                         res.end();
                     }else if(json[0].role == "Manager"){
-                        res.render("ManagerFiles/managerHomePage")
+                        //res.render("ManagerFiles/managerHomePage")
+                        res.redirect("/managerHomePage")
                         res.end();
                     }else{
-                        res.render("DirectorPages/DirectorHomePage")
+                        //res.render("DirectorPages/DirectorHomePage")
+                        res.redirect("/directorHomePage")
                     }});
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
@@ -103,8 +118,22 @@ app.get("/devHomePage", function(req, res) {
     res.render("DevPugs/devHomePage");
 })
 app.get("/managerHomePage", function(req, res) {
-    res.render("ManagerFiles/managerHomePage");
-})
+    connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+        console.log(results);
+        var string = JSON.stringify(results);
+        console.log('>> string: ', string);
+        var json = JSON.parse(string);
+        console.log(json[0].firstName);
+        name =  json[0].firstName;
+        console.log(fullDate);
+        if (error) throw error;
+        res.render("ManagerFiles/managerHomePage",{
+            user: username,
+            date:mdate,
+            empname: name});
+    })});
+
+
 app.get("/resetPassword", function (req, res){
     res.render("resetPassword")
 })
