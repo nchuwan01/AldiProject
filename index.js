@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
+let con = require('./public/js/db')
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -86,10 +87,20 @@ app.post('/auth',function (req,res){
 });
 
 app.get("/managerStatusPage", function (req, res){
-    res.render("ManagerFiles/managerStatusPage");
+    let sql = `SELECT * FROM request where employeeid = 817052`
+    con.query(sql, function (error, results){
+        res.render("ManagerFiles/managerStatusPage", {
+            rows : results
+        })
+    })
 })
 app.get("/devStatusPage", function (req, res){
-    res.render("DevPugs/devStatusPage")
+    let sql = `SELECT * FROM request where employeeid = 936350`
+    con.query(sql, function (error, results){
+        res.render("DevPugs/devStatusPage", {
+            rows : results
+        })
+    })
 })
 app.get("/managerPrintReport", function (req, res){
     res.render("ManagerFiles/managerPrintReport")
