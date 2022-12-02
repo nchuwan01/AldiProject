@@ -95,6 +95,7 @@ head
 include ../includes/EmpSideBar
 
 .main
+    h1 welcome #{empname}
     .container
         .row.containBoxes
             .containFirst.col-lg-4.col-md-12.col-sm-12
@@ -156,7 +157,7 @@ include ../includes/EmpSideBar
         });
     .container2.row
         .date.col-lg-4.col-md-12.col-sm-12
-            div Todays Date:11/18/22
+            div Todays Date:#{date}
             div Hire Date:11/11/22
             div Days Till Reset:340
     a.buttonReq(href="/devmakeRequest" class="btn btn-info") Go To Request
