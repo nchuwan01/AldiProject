@@ -23,6 +23,49 @@ app.get('/', function(req, res) {
     res.render("login")
 });
 
+app.post('/register', function (req,res) {
+
+    let employeeid = req.body.username;
+    let email = req.body.email;
+    let password = req.body.password;
+    console.log(employeeid,password);
+    connection.query('SELECT Count(1) AS count FROM employee WHERE employeeid = ? AND email= ?', [employeeid, email], function (error, results, fields)
+    {
+        if (error) throw "Error!";
+        console.log(results);
+        var string = JSON.stringify(results);
+        console.log('>> string: ', string);
+        var json = JSON.parse(string);
+        console.log(json[0].count);
+
+        console.log(employeeid,password);
+        if(json[0].count == 1)
+        {
+            console.log(employeeid)
+            connection.query('INSERT INTO login(employeeid,password) values(?, ?)',[employeeid, password], (error, results,field)=>{
+                if (error) {
+                    return console.error(error.message);
+                }
+                // get inserted rows
+                console.log('Row inserted:' + results.affectedRows);
+                res.render("logIn")
+                res.end();
+            });
+
+        }
+
+
+      /*  if(results.)
+        {
+            console.log("Found!");
+
+        }*/
+
+    })
+
+})
+
+
 
 app.post('/auth',function (req,res){
     let username = req.body.username
