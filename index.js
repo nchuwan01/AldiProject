@@ -37,9 +37,6 @@ app.post('/auth',function (req,res){
                 // Authenticate the user
                 req.session.loggedin = true;
                 req.session.username = username;
-
-
-
                 // Redirect to home page
                 connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
                     console.log(results);
@@ -57,7 +54,7 @@ app.post('/auth',function (req,res){
                     }else{
                         res.render("DirectorPages/DirectorHomePage")
                     }});
-            }  else {
+            } else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
 
                // res.send('Incorrect Username and/or Password!');
@@ -71,6 +68,71 @@ app.post('/auth',function (req,res){
         res.end();
     }
 });
+
+
+// app.post('/update',function(req, res){
+//     let mail = req.body.mail
+//     let password = req.body.password
+//     let username = req.body.username
+//     console.log(username,mail,password)
+//     // loop through employee table to match id
+//     if(username && mail){
+//         connection.query('SELECT employeeid FROM employee WHERE employeeid = ? AND email = ? ',[username,mail])
+//         if(error)throw error;
+//         //is there anything on the list with that employee id?
+//         if(result.length > 0){
+//             connection.query('INSERT INTO login (employeeid, password)')
+//         }else{
+//             res.render("registration",{data: "That Employee ID does not exsit"})
+//         }
+//     }
+// });
+app.post('/reset', function (req,res){
+    let employeeid = req.body.username;
+    let email = req.body.email;
+    console.log(employeeid,email);
+    
+
+
+
+})
+
+app.post('/register', function (req,res) {
+
+    let employeeid = req.body.username;
+    let email = req.body.email;
+    let password = req.body.password;
+    console.log(employeeid,password);
+    connection.query('SELECT Count(1) AS count FROM employee WHERE employeeid = ? AND email= ?', [employeeid, email], function (error, results, fields)
+    {
+        if (error) throw "Error!";
+        console.log(results);
+        var string = JSON.stringify(results);
+        console.log('>> string: ', string);
+        var json = JSON.parse(string);
+        console.log(json[0].count);
+
+        console.log(employeeid,password);
+        if(json[0].count == 1)
+        {
+            console.log(employeeid)
+            connection.query('INSERT INTO login(employeeid,password) values(?, ?)',[employeeid, password], (error, results,field)=>{
+                if (error) {
+                    return console.error(error.message);
+                }
+                // get inserted rows
+                console.log('Row inserted:' + results.affectedRows);
+                res.render("logIn")
+                res.end();
+            });
+
+        }
+
+
+    })
+
+})
+
 
 app.get("/managerStatusPage", function (req, res){
     res.render("ManagerFiles/managerStatusPage");
@@ -111,7 +173,10 @@ app.get("/resetPassword", function (req, res){
 app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
-let port = 3023;
+app.get("/resetpassword2",function (req, res){
+    res.render("resetpassword2")
+})
+let port = 3025;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
