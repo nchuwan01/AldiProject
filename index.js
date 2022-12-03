@@ -63,7 +63,7 @@ app.post('/auth',function (req,res){
                         //res.render("DevPugs/devHomePage")
                         res.redirect("/devHomePage")
                         res.end();
-                    }else if(json[0].role == "Manager"){
+                    }else if(json[0].role === "Manager"){
                         //res.render("ManagerFiles/managerHomePage")
                         res.redirect("/managerHomePage")
                         res.end();
@@ -133,7 +133,22 @@ app.get("/directorHomePage", function(req, res) {
         res.send('Please login to view this page!');
     }})
 app.get("/makeRequest", function(req, res) {
-    res.render("ManagerFiles/RequestPage");
+    if(req.session.loggedin){
+        connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            var string = JSON.stringify(results);
+            var json = JSON.parse(string);
+            name =  json[0].firstName;
+            lastname = json[0].lastName;
+            if (error) throw error;
+            res.render("ManagerFiles/RequestPage",{
+                user: username,
+                date:mdate,
+                empname: name,
+                lname : lastname
+            });
+        })}else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/devmakeRequest", function(req, res) {
     res.render("DevPugs/devRequestPage");
@@ -159,19 +174,22 @@ app.get("/devHomePage", function(req, res) {
 });
 app.get("/managerHomePage", function(req, res) {
     if(req.session.loggedin){
-    connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+    connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
         console.log(results);
         var string = JSON.stringify(results);
         console.log('>> string: ', string);
         var json = JSON.parse(string);
         console.log(json[0].firstName);
         name =  json[0].firstName;
+        lastname =  json[0].lastName;
         console.log(fullDate);
         if (error) throw error;
         res.render("ManagerFiles/managerHomePage",{
             user: username,
             date:mdate,
-            empname: name});
+            empname: name,
+            lname: lastname
+        });
     })}else{
         res.send('Please login to view this page!');
     }
