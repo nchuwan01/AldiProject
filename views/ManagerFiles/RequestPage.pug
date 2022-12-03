@@ -5,20 +5,15 @@ head
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js')
     link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet')
     script(src="https://kit.fontawesome.com/e44e9475ed.js" crossorigin="anonymous")
-    include ../includes/ManagerSideBar
 
+    include ../includes/ManagerSideBar
     style.
         .main {
             text-align: center;
-            margin-top: 3%;
-            display: flex;
-            justify-content: space-evenly;
         }
 
         #startDate, #endDate, #selectPTO {
-            margin: 5% 5%;
-
-            height: 90%;
+            height: 70px;
             width: 150px;
         }
 
@@ -27,56 +22,67 @@ head
             height: 100px;
             width: 400px;
         }
-        .type
+        .entireMain{
+            border-radius: 5%;
+            background-color: rgba(41, 109, 175, 0.4);
+            margin-left: 2.5%;
+            width: 95%;
+            height: 80vh;
+        }
+        .main
         {
             display: flex;
-        }
-        .word
-        {
-            margin-top: 5%;
-        }
-        .submitInfo
-        {
-            margin-top: 5%;
-            margin-left: 39%;
-        }
-        .Submit {
-            margin-top: 5%;
-            margin-left: 12%;
-        }
-        #buttonHover:hover
-        {
-            background-color: #00ffe1;
-
-        }
-        .SelectDivs:hover {
-            size: 200px;
+            padding-left: 10%;
+            justify-content: space-between;
         }
 
-dev.main
+        .selectPTO{
+            border-radius: 5%;
+            background-color: rgba(24, 127, 183, 0.3);
+            margin-top: 5%;
+            font-size: 20px;
+            color: rgba(46, 46, 101, 0.44);
+            padding-bottom: 2%;
 
-    div.type
-        div.word
-            h3 Type:
-        div
-            select.SelectDivs(class="btn btn-secondary dropdown-toggle" id="selectPTO")
+        }
+        .selectPTO>p{
+
+            display: inline;
+            color: rgba(0, 30, 128, 0.7);
+            margin-top: 200px;
+            border-radius: 10%;
+            margin-left: 2%;
+        }
+        .bottomBox{
+            padding: 5% 0% 0% 33%;
+        }
+        #buttonReq{
+            margin-left: 13%;
+            margin-top: 8%;
+        }
+        #buttonReq:Hover{
+            background-color: #5252fc;
+        }
+        .getInfo{
+        }
+
+.entireMain
+    .main
+        div.selectPTO
+            p PTO Type:
+            select.getInfo(class="btn btn-secondary dropdown-toggle" id="selectPTO")
                 option Vacation
                 option Personal
                 option Sick
-
-    div.type
-        div.word
-            h3 Start Date:
-        div
-            input.SelectDivs(type="date" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
-    div.type
-        div.word
-            h3 End Date:
-        div
-            input.SelectDivs(type="date" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
-div.submitInfo
-    div.commentBox
-        textarea(id="commentBox" placeholder="Leave a comment" maxlength=150)
-
-    div.Submit
-        button(type="submit" id="buttonHover" alt="Comment"  class="btn btn-secondary btn-lg") Make Request
+        div.selectPTO
+            p Start Date:
+            input.getInfo(type="date" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
+        div.selectPTO
+            p End Date:
+            input.getInfo(type="date" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
+        br
+        br
+    .bottomBox
+        textarea(id="commentBox" placeholder="Enter Comment Here")
+        br
+        button#buttonReq(type="submit" alt="Comment" class="btn btn-secondary btn-lg") Make Request
