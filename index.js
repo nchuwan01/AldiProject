@@ -36,6 +36,20 @@ app.get('/', function(req, res) {
     res.render("login")
 });
 
+app.post("/requested", function (req,res){
+    let sVal = req.body.selectVal;
+    let startD = req.body.startDate;
+    let endD = req.body.endDate;
+    let com = req.body.TextInfo;
+    if(sVal && startD && endD)
+    {
+        connection.query('')
+        console.log(sVal, startD,endD);
+    }
+    else
+        console.log("Please reneter");
+})
+
 
 app.post('/auth',function (req,res){
     username = req.body.username
