@@ -1,0 +1,132 @@
+
+style.
+    body {
+        font-family: "Arial", sans-serif;
+        background-color: #E1E1EB;
+    }
+
+    .sidebar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #000000;
+        display: block;
+    }
+
+    .main {
+        margin-top: 1%;
+    }
+
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+    }
+
+
+    #imgInfo
+    {
+        display: inline-block;
+        height: 25%;
+        width: 6%;
+    }
+
+
+    .container-fluid a p{
+        position: absolute;
+
+        bottom: 0;
+    }
+
+    .navi
+    {
+        background-color: #d6efff;
+        position: relative;
+        padding-top: .2%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .topRightNav{
+        padding: 2px 2px 2px 2px;
+        display: flex;
+    }
+    i
+    {
+        position: absolute;
+        bottom: 30%;
+    }
+    .buttonNav
+    {
+        margin-left: 10px;
+    }
+    .inRight
+    {
+        padding-left:10px;
+        color: black;
+    }
+    .infoNav
+    {
+        display: flex;
+        padding-left: 50px;
+        padding-right: 20px;
+    }
+
+    .name
+    {
+        padding-top: 8px;
+        padding-right: 5px;
+
+    }
+    .iconExit
+    {
+        margin-top: 5px;
+        size: 50px;
+    }
+    a {
+        color: black;
+    }
+    .bars:hover
+    {
+        font-size: 20px;
+    }
+    .inRight:hover,.buttonNav:hover
+    {
+        color: blue;
+        cursor: pointer;
+    }
+
+
+div.navi
+    img#imgInfo(src="../images/AL_BLR_SQ_MC_RGB.png" alt="image")
+    div.bars
+        a.bars(href="/managerHomePage")
+            i(class="fa-solid fa-house")
+                |    Home
+    div.bars
+        a.bars(href="/makeRequest")
+            i(class="fa-solid fa-calendar-check")
+                |      Request PTO
+    div.bars
+        a.bars(href="/managerStatusPage")
+            i(class="fa-solid fa-bars-progress")
+                |      Statuses
+    div.bars
+        a.bars(href="/managerEmployeeReport")
+            i(class="fa-solid fa-list-check")
+                |      Employee Report
+    div.topRightNav
+        a.inRight
+            p(class="fa-solid fa-lg fa-bell")
+        a.inRight
+            p(class="fa-regular fa-lg fa-comment")
+
+        div
+            div.infoNav
+                p.name Narayan Chuwan
+                    div.buttonNav
+                        a(href="/")
+                            p.iconExit(class="fa-solid fa-2x fa-right-from-bracket")
