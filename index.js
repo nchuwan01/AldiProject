@@ -1,24 +1,11 @@
 const express = require('express')
-const con = require('./public/js/db')
 const app = express()
 let bodyParser = require('body-parser')
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-app.use(express.static('public'))
-<<<<<<< Updated upstream
-
-app.get("/managerStatusPage", function (req, res){
-    res.render("managerStatusPage");
-})
-
-let port = 3018;
-=======
+app.use(express.static('public'));
 const session = require('express-session');
 const path = require('path');
 const mysql = require('mysql');
@@ -41,9 +28,8 @@ app.post('/register', function (req,res) {
     let employeeid = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
-    console.log(employeeid,password);
-    connection.query('SELECT Count(1) AS count FROM employee WHERE employeeid = ? AND email= ?', [employeeid, email], function (error, results, fields)
-    {
+    console.log(employeeid, password);
+    connection.query('SELECT Count(1) AS count FROM employee WHERE employeeid = ? AND email= ?', [employeeid, email], function (error, results, fields) {
         if (error) throw "Error!";
         console.log(results);
         var string = JSON.stringify(results);
@@ -51,11 +37,10 @@ app.post('/register', function (req,res) {
         var json = JSON.parse(string);
         console.log(json[0].count);
 
-        console.log(employeeid,password);
-        if(json[0].count == 1)
-        {
+        console.log(employeeid, password);
+        if (json[0].count == 1) {
             console.log(employeeid)
-            connection.query('INSERT INTO login(employeeid,password) values(?, ?)',[employeeid, password], (error, results,field)=>{
+            connection.query('INSERT INTO login(employeeid,password) values(?, ?)', [employeeid, password], (error, results, field) => {
                 if (error) {
                     return console.error(error.message);
                 }
@@ -68,16 +53,14 @@ app.post('/register', function (req,res) {
         }
 
 
-      /*  if(results.)
-        {
-            console.log("Found!");
+        /*  if(results.)
+          {
+              console.log("Found!");
 
-        }*/
+          }*/
 
     })
-
-})
-
+});
 
 
 app.post('/auth',function (req,res){
@@ -168,7 +151,6 @@ app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
 let port = 3023;
->>>>>>> Stashed changes
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });

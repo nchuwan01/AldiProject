@@ -1,4 +1,5 @@
-/* connects to the database */
+/*
+/!* connects to the database *!/
 let mysql = require('mysql');
 let PTODATA = require('./PTOAccrualBrackets.json');
 let PTOUserData = require('./PTOUserSeedData.json');
@@ -21,7 +22,6 @@ con.connect((err)=>{
     console.log("MySQL connect..")
 })
 
-
 app.get("/createAccural", (req,res)=>
 {
     let sql  ='CREATE TABLE Test(id int AUTO_INCREMENT, title VARCHAR(255), PRIMARY KEY(id))';
@@ -43,18 +43,14 @@ app.get("/postPTO", (req, res)=>{
     })
 })
 
-port= 3001;
-app.listen(port, ()=> {
-    console.log('Server started on port'+port);
-})
 
 
 
 
 
 
+app.get("/postDatas", (req, res)=> {
 
-/*con.connect((err) => {
     console.log(PTOUserData.length);
     console.log(PTODATA.length);
     if (err) return console.error('error: ' + err.message);
@@ -98,13 +94,10 @@ app.listen(port, ()=> {
         )
 
 
-
-
     }
 
 
-    for(let i=0; i<PTODATA.length; i++)
-    {
+    for (let i = 0; i < PTODATA.length; i++) {
         var yearsWorked = PTODATA[i].NumberOfYears,
             role = PTODATA[i].Role,
             maxVac = PTODATA[i].MaxVacation,
@@ -112,27 +105,33 @@ app.listen(port, ()=> {
             vacAccuralDate = PTODATA[i].VacationAccuralDate,
             maxPer = PTODATA[i].MaxPersonal,
             perPerYear = PTODATA[i].PersonalPerYear,
-            perAccuralDate= PTODATA[i].PersonalAccuralDate,
+            perAccuralDate = PTODATA[i].PersonalAccuralDate,
             maxSick = PTODATA[i].MaxSick,
             sickPerYear = PTODATA[i].SickPerYear,
             sickAccural = PTODATA[i].SickAccuralDate;
 
         var insertStatement =
             `INSERT INTO accural values(?, ?, ?, ?,?,?,?,?,?,?,?)`;
-        var items = [yearsWorked, role, maxVac, vacPerYear,vacAccuralDate,maxPer,perPerYear,perAccuralDate,maxSick,sickPerYear,sickAccural ];*/
-
-        /*
-                     con.query(insertStatement, items,
-                         (err, results, fields) => {return console.log(err);});*/
-
-        /*
-        */
+        var items = [yearsWorked, role, maxVac, vacPerYear, vacAccuralDate, maxPer, perPerYear, perAccuralDate, maxSick, sickPerYear, sickAccural];
 
 
+    }
+
+    /!*
+                 con.query(insertStatement, items,
+                     (err, results, fields) => {return console.log(err);});*!/
+
+    /!*
+    *!/
+
+
+    port= 3001;
+    app.listen(port, ()=> {
+        console.log('Server started on port'+port);
+    })
+
+})
 
 
 
-
-
-
-module.exports = con;
+module.exports = con;*/

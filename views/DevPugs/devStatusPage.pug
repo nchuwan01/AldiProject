@@ -1,6 +1,7 @@
 doctype html
 head
-    title Manager Status
+
+    title Employee Status
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js')
@@ -40,13 +41,17 @@ head
 div.main
     #tableData(class="table-wrapper-scroll-y my-custom-scrollbar")
         table.table.table-striped(class="table table-bordered table-striped mb-0")
+.main
+    if rows.length === 1
+        table.table.table-striped
             thead.table-dark
                 tr
                     td Dates
                     td Days Off
                     td Status
                     td Details
-            tbody
+    else
+        table.table.table-striped
                 tr
                     td Data
                     td Data
@@ -144,3 +149,16 @@ div.main
                                     h2 Comments from Director
                                 .w3-container
                                     p Comment
+                each row in rows
+                    tr
+                        td #{row.startDate} to #{row.endDate}
+                        td #{row.numDaysOff}
+                        td #{row.requestStatus}
+                        td
+                            button.w3-button.w3-black(onclick=`document.getElementById(${row.requestid}).style.display='block'`) Details
+                            div(id=`${row.requestid}` class="w3-modal")
+                                .w3-modal-content
+                                    .w3-container
+                                        span.w3-button.w3-display-topright(onclick=`document.getElementById(${row.requestid}).style.display='none'`) &times;
+                                        h1 Comment From Manager
+                                        p #{row.commentRequest}
