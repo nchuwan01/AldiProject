@@ -67,23 +67,22 @@ head
         }
 
 .entireMain
-    form(action='/requested' method='post')
-        .main
-            div.selectPTO
-                p PTO Type:
-                select.getInfo(class="btn btn-secondary dropdown-toggle" name="selectVal" id="selectPTO")
-                    option Vacation
-                    option Personal
-                    option Sick
-            div.selectPTO
-                p Start Date:
-                input.getInfo(type="date" name="startDate" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
-            div.selectPTO
-                p End Date:
-                input.getInfo(type="date" name="endDate" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
-            br
-            br
-        .bottomBox
-            textarea(id="commentBox" name="TextInfo" placeholder="Enter Comment Here")
-            br
-            button#buttonReq(type="submit" alt="Comment" class="btn btn-secondary btn-lg") Make Request
+    .main
+        div.selectPTO
+            p PTO Type:
+            select.getInfo(class="btn btn-secondary dropdown-toggle" id="selectPTO")
+                option Vacation
+                option Personal
+                option Sick
+        div.selectPTO
+            p Start Date:
+            input.getInfo(type="date" placeholder="Enter Start Date" class="btn btn-secondary" id="startDate")
+        div.selectPTO
+            p End Date:
+            input.getInfo(type="date" placeholder="Enter End Date"  class="btn btn-secondary" id="endDate")
+        br
+        br
+    .bottomBox
+        textarea(id="commentBox" placeholder="Enter Comment Here")
+        br
+        button#buttonReq(type="submit" alt="Comment" class="btn btn-secondary btn-lg") Make Request
