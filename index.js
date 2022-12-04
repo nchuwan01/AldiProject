@@ -87,32 +87,127 @@ app.post('/auth',function (req,res){
 });
 
 app.get("/managerStatusPage", function (req, res){
-    let sql = `SELECT * FROM request where employeeid = 817052`
-    con.query(sql, function (error, results){
-        res.render("ManagerFiles/managerStatusPage", {
-            rows : results
-        })
-    })
+    if(req.session.loggedin){
+        connection.query('SELECT * FROM employee NATURAL JOIN request WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results.length)
+            if (Object.keys(results).length === 0){
+                connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+                    console.log("made it in if")
+                    console.log(results.length)
+                    res.render("ManagerFiles/managerStatusPage",{
+                        empname: name,
+                        lname: lastname,
+                        rows: results
+                    });
+                })
+            }else {
+                console.log('made it in else')
+                console.log(results.length)
+                var string = JSON.stringify(results);
+                var json = JSON.parse(string);
+                name =  json[0].firstName;
+                lastname = json[0].lastName;
+
+                res.render("ManagerFiles/managerStatusPage",{
+                    empname: name,
+                    lname: lastname,
+                    rows: results
+                });
+            }
+        })}
+    else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/devStatusPage", function (req, res){
-    let sql = `SELECT * FROM request where employeeid = 936350`
-    con.query(sql, function (error, results){
-        res.render("DevPugs/devStatusPage", {
-            rows : results
-        })
-    })
+    if(req.session.loggedin){
+        connection.query('SELECT * FROM employee NATURAL JOIN request WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results.length)
+            if (Object.keys(results).length === 0){
+                connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+                    console.log("made it in if")
+                    console.log(results.length)
+                    res.render("DevPugs/devStatusPage",{
+                        empname: name,
+                        lname: lastname,
+                        rows: results
+                    });
+                })
+            }else {
+                console.log('made it in else')
+                console.log(results.length)
+                var string = JSON.stringify(results);
+                var json = JSON.parse(string);
+                name =  json[0].firstName;
+                lastname = json[0].lastName;
+
+                res.render("DevPugs/devStatusPage",{
+                    empname: name,
+                    lname: lastname,
+                    rows: results
+                });
+            }
+        })}
+    else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/managerPrintReport", function (req, res){
     res.render("ManagerFiles/managerPrintReport")
 })
 app.get("/directorPrintReport", function (req, res){
-    res.render("DirectorPages/directorPrintReport")
+    if(req.session.loggedin){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            var string = JSON.stringify(results);
+            var json = JSON.parse(string);
+            name =  json[0].firstName;
+            lastname = json[0].lastName;
+            if (error) throw error;
+            res.render("DirectorPages/directorPrintReport",{
+                user: username,
+                date: mdate,
+                empname: name,
+                lname : lastname
+            });
+        })}else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/managerEmployeeReport", function (req, res){
-    res.render("ManagerFiles/managerEmployeeReport")
+    if(req.session.loggedin){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            var string = JSON.stringify(results);
+            var json = JSON.parse(string);
+            name =  json[0].firstName;
+            lastname = json[0].lastName;
+            if (error) throw error;
+            res.render("ManagerFiles/managerEmployeeReport",{
+                user: username,
+                date: mdate,
+                empname: name,
+                lname : lastname
+            });
+        })}else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/directorEmployeeReport", function (req, res){
-    res.render("DirectorPages/directorEmployeeReport")
+    if(req.session.loggedin){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            var string = JSON.stringify(results);
+            var json = JSON.parse(string);
+            name =  json[0].firstName;
+            lastname = json[0].lastName;
+            if (error) throw error;
+            res.render("DirectorPages/directorEmployeeReport",{
+                user: username,
+                date: mdate,
+                empname: name,
+                lname : lastname
+            });
+        })}else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/directorHomePage", function(req, res) {
     if(req.session.loggedin){
@@ -134,7 +229,7 @@ app.get("/directorHomePage", function(req, res) {
     }})
 app.get("/makeRequest", function(req, res) {
     if(req.session.loggedin){
-        connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
             var string = JSON.stringify(results);
             var json = JSON.parse(string);
             name =  json[0].firstName;
@@ -142,7 +237,7 @@ app.get("/makeRequest", function(req, res) {
             if (error) throw error;
             res.render("ManagerFiles/RequestPage",{
                 user: username,
-                date:mdate,
+                date: mdate,
                 empname: name,
                 lname : lastname
             });
@@ -151,7 +246,22 @@ app.get("/makeRequest", function(req, res) {
     }
 })
 app.get("/devmakeRequest", function(req, res) {
-    res.render("DevPugs/devRequestPage");
+    if(req.session.loggedin){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            var string = JSON.stringify(results);
+            var json = JSON.parse(string);
+            name =  json[0].firstName;
+            lastname = json[0].lastName;
+            if (error) throw error;
+            res.render("DevPugs/devRequestPage",{
+                user: username,
+                date: mdate,
+                empname: name,
+                lname : lastname
+            });
+        })}else{
+        res.send('Please login to view this page!');
+    }
 })
 app.get("/devHomePage", function(req, res) {
     if(req.session.loggedin){
@@ -194,7 +304,6 @@ app.get("/managerHomePage", function(req, res) {
         res.send('Please login to view this page!');
     }
 });
-
 
 app.get("/resetPassword", function (req, res){
     res.render("resetPassword")
