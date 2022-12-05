@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
+<<<<<<< HEAD
+=======
+let con = require('./public/js/db')
+>>>>>>> parent of 7b9f71c (Update index.js)
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
