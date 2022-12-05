@@ -336,6 +336,12 @@ app.get("/devHomePage", function(req, res) {
 });
 app.get("/managerHomePage", function(req, res) {
         var Years;
+        var VD;
+        var maxVD;
+        var SD;
+        var maxSD;
+        var PD;
+        var maxPD;
         if(req.session.loggedin){
             connection.query('SELECT yearsWorked FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
                 console.log(results);
@@ -345,6 +351,27 @@ app.get("/managerHomePage", function(req, res) {
                 console.log(json[0].yearsWorked);
                 Years =  json[0].yearsWorked;
             });
+            //pulls vd sd and pd for employee
+            connection.query('SELECT vd, pd, sd FROM ptoBalance WHERE employeeid = ?',[username],function(error,results,fields){
+                console.log(results);
+                var string = JSON.stringify(results);
+                console.log('>> string: ', string);
+                var json = JSON.parse(string);
+                VD=json[0].vd;
+                SD=json[0].sd;
+                PD=json[0].pd;
+            });
+            // //grabs max vd pd and sd from employee
+            // connection.query('SELECT maxVac FROM accural WHERE role = ? AND yearsWorked <= ?',["Manager", Years],function(error,results,fields){
+            //     //SELECT maxVac FROM `accural` WHERE role="Manager" AND yearsWorked <= 8
+            //     console.log("MaxVAC")
+            //     console.log(results);
+            //     var string = JSON.stringify(results);
+            //     console.log('>> string: ', string);
+            //     var json = JSON.parse(string);
+            //
+            // });
+
         connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
         console.log(results);
         var string = JSON.stringify(results);
@@ -356,6 +383,7 @@ app.get("/managerHomePage", function(req, res) {
         console.log(fullDate);
         if (error) throw error;
         res.render("ManagerFiles/managerHomePage",{
+            vac:VD,
             YearsWorked: Years,
             user: username,
             date:mdate,
