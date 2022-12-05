@@ -30,7 +30,6 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'static')))
 
-
 app.get('/', function(req, res) {
     // Render login template
     res.render("login")
@@ -74,7 +73,6 @@ app.post("/requested", function (req,res){
         console.log("Please reneter");
 })
 
-
 app.post('/reset',function (req, res){
     let email = req.body.email;
     let username = req.body.username;
@@ -104,19 +102,6 @@ app.post('/reset',function (req, res){
 
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.post('/register', function (req,res) {
 
