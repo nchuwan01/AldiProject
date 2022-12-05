@@ -10,35 +10,11 @@ head
 
     style.
 
-    include ../includes/ManagerSideBar
-.main
-    if rows.length === 1
-        table.table.table-striped
             thead.table-dark
                 tr
                     td Dates
                     td Days Off
                     td Status
                     td Details
-    else
-        table.table.table-striped
-            thead.table-dark
                 tr
-                    td Dates
-                    td Days Off
-                    td Status
-                    td Details
             tbody
-                each row in rows
-                    tr
-                        td #{row.startDate} to #{row.endDate}
-                        td #{row.numDaysOff}
-                        td #{row.requestStatus}
-                        td
-                            button.w3-button.w3-black(onclick=`document.getElementById(${row.requestid}).style.display='block'`) Details
-                            div(id=`${row.requestid}` class="w3-modal")
-                                .w3-modal-content
-                                    .w3-container
-                                        span.w3-button.w3-display-topright(onclick=`document.getElementById(${row.requestid}).style.display='none'`) &times;
-                                        h1 Comment From Director
-                                        p #{row.commentRequest}
