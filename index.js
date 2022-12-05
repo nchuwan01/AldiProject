@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
+<<<<<<< HEAD
+=======
+let con = require('./public/js/db')
+>>>>>>> parent of bcba4e2 (reset pushed)
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -76,6 +80,17 @@ app.post('/register', function (req,res) {
             });
 
         }
+<<<<<<< HEAD
+=======
+
+
+        /*  if(results.)
+          {
+              console.log("Found!");
+
+          }*/
+
+>>>>>>> parent of bcba4e2 (reset pushed)
     })
 });
 
@@ -113,6 +128,11 @@ app.post('/auth',function (req,res){
                     }});
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
+<<<<<<< HEAD
+=======
+
+               // res.send('Incorrect Username and/or Password!');
+>>>>>>> parent of bcba4e2 (reset pushed)
             }
 
         });
