@@ -8,13 +8,9 @@ let bodyParser = require('body-parser')
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 let con = require('./public/js/db')
 >>>>>>> parent of 7b9f71c (Update index.js)
-=======
-let con = require('./public/js/db')
->>>>>>> parent of bcba4e2 (reset pushed)
 =======
 let con = require('./public/js/db')
 >>>>>>> parent of bcba4e2 (reset pushed)
@@ -165,9 +161,6 @@ app.post('/auth',function (req,res){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of bcba4e2 (reset pushed)
-=======
 >>>>>>> parent of bcba4e2 (reset pushed)
 =======
 >>>>>>> parent of bcba4e2 (reset pushed)
