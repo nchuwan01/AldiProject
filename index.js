@@ -31,7 +31,6 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'static')))
 
 app.get('/', function(req, res) {
-    // Render login template
     res.render("login")
 });
 let i =0;
