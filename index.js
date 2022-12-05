@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
-let con = require('./public/js/db')
+//let con = require('./public/js/db')
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -35,20 +35,89 @@ app.get('/', function(req, res) {
     // Render login template
     res.render("login")
 });
-
+let i =0;
 app.post("/requested", function (req,res){
     let sVal = req.body.selectVal;
     let startD = req.body.startDate;
     let endD = req.body.endDate;
     let com = req.body.TextInfo;
+    let TodayDate = startD.getFullYear;
+    /*let yearToday = startD.getFullYear();
+    let monthToday = (startD.getMonth()) + 1;
+    let dayToday = (startD.getDay()) - 1;
+
+    let totalDaysYear = (yearToday - year) * 365;
+    let totalDaysMonth = (monthToday - month) * 30.4;
+    let totalDays = dayToday - day;
+    let totalDaysCount = parseInt((totalDaysYear + totalDaysMonth + totalDays) / 365);*/
+    i++;
+    console.log(name, username)
+    console.log(TodayDate);
     if(sVal && startD && endD)
     {
-        connection.query('')
-        console.log(sVal, startD,endD);
-    }
+        if(req.session.loggedin)
+        {
+            connection.query('INSERT INTO request(employeeid,requestStatus, startDate, endDate, commentRequest, numDaysOff,requestType,requestid,leaderid) values(?,?,?,?,?,?,?,?,?)',
+                [username, "pending", startD, endD, com,5,sVal,i,1234], (error, results, field) => {
+                    if (error) {
+                        return console.error(error.message);
+                    }
+                    // get inserted rows
+                    console.log('Row inserted:' + results.affectedRows);
+                    res.render("ManagerFiles/RequestPage")
+                    res.end();
+                });
+        }
+        }
+
     else
         console.log("Please reneter");
 })
+
+
+app.post('/reset',function (req, res){
+    let email = req.body.email;
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username,email,password);
+    connection.query('SELECT count(1) AS count FROM employee WHERE employeeid =? AND email = ?',[username,email],(error, results,field)=>
+    {if (error) throw "Error!";
+        console.log(results);
+        var string = JSON.stringify(results);
+        console.log('>> string: ', string);
+        var json = JSON.parse(string);
+        console.log(json[0].count);
+        console.log(username,email,password)
+        if(json[0].count == 1){
+            console.log("COunt found")
+            connection.query('UPDATE login SET password=? WHERE employeeid = ?',[password[0],username],(error,results,field )=>{
+                console.log(password[0]);
+                console.log(username);
+                if (error){
+                    return console.error(error.message);
+                    alert("ERRROR: incorrect email or username");
+                }
+                res.render("login")
+                res.end();
+            })
+        }
+
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post('/register', function (req,res) {
 
     let employeeid = req.body.username;
@@ -64,7 +133,7 @@ app.post('/register', function (req,res) {
         console.log(json[0].count);
 
         console.log(employeeid, password);
-        if (json[0].count === 1) {
+        if (json[0].count == 1) {
             console.log(employeeid)
             connection.query('INSERT INTO login(employeeid,password) values(?, ?)', [employeeid, password], (error, results, field) => {
                 if (error) {
@@ -82,7 +151,6 @@ app.post('/register', function (req,res) {
         /*  if(results.)
           {
               console.log("Found!");
-
           }*/
 
     })
@@ -94,7 +162,7 @@ app.post('/auth',function (req,res){
     console.log(username,password)
     if(username && password){
         connection.query('SELECT * FROM login WHERE employeeid = ? AND password = ?', [username, password], function(error, results, fields) {
-        // If there is an issue with the query, output the error
+            // If there is an issue with the query, output the error
             if (error) throw error;
             // If the account exists
             if (results.length > 0) {
@@ -125,7 +193,7 @@ app.post('/auth',function (req,res){
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
 
-               // res.send('Incorrect Username and/or Password!');
+                // res.send('Incorrect Username and/or Password!');
             }
 
         });
@@ -335,23 +403,23 @@ app.get("/devHomePage", function(req, res) {
 });
 app.get("/managerHomePage", function(req, res) {
     if(req.session.loggedin){
-    connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-        console.log(results);
-        var string = JSON.stringify(results);
-        console.log('>> string: ', string);
-        var json = JSON.parse(string);
-        console.log(json[0].firstName);
-        name =  json[0].firstName;
-        lastname =  json[0].lastName;
-        console.log(fullDate);
-        if (error) throw error;
-        res.render("ManagerFiles/managerHomePage",{
-            user: username,
-            date:mdate,
-            empname: name,
-            lname: lastname
-        });
-    })}else{
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results);
+            var string = JSON.stringify(results);
+            console.log('>> string: ', string);
+            var json = JSON.parse(string);
+            console.log(json[0].firstName);
+            name =  json[0].firstName;
+            lastname =  json[0].lastName;
+            console.log(fullDate);
+            if (error) throw error;
+            res.render("ManagerFiles/managerHomePage",{
+                user: username,
+                date:mdate,
+                empname: name,
+                lname: lastname
+            });
+        })}else{
         res.send('Please login to view this page!');
     }
 });
@@ -362,7 +430,7 @@ app.get("/resetPassword", function (req, res){
 app.get("/registrationPage", function (req, res){
     res.render("registrationPage")
 })
-let port = 3023;
+let port = 3029;
 app.listen(port, ()=>{
     console.log("Listening on http://localhost:" + port);
 });
