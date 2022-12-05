@@ -117,7 +117,6 @@ app.post('/register', function (req,res) {
         console.log(json[0].count);
 
         console.log(employeeid, password);
-        if (json[0].count == 1) {
             console.log(employeeid)
             connection.query('INSERT INTO login(employeeid,password) values(?, ?)', [employeeid, password], (error, results, field) => {
                 if (error) {
