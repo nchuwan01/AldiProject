@@ -185,24 +185,31 @@ app.get("/managerStatusPage", function (req, res){
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
                     console.log("made it in if")
-                    console.log(results.length)
+                    var string = JSON.stringify(results);
+                    var json = JSON.parse(string);
+                    let array = Object.values(json[0])
+                    console.log(array)
+                    console.log(array.length)
                     res.render("ManagerFiles/managerStatusPage",{
                         empname: name,
                         lname: lastname,
+                        array,
                         rows: results
                     });
                 })
             }else {
                 console.log('made it in else')
-                console.log(results.length)
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
-                console.log(json)
+                let array = Object.values(json[0])
+                console.log(array)
+                console.log(array.length)
                 res.render("ManagerFiles/managerStatusPage",{
                     empname: name,
                     lname: lastname,
+                    array,
                     rows: results
                 });
             }
@@ -218,26 +225,31 @@ app.get("/devStatusPage", function (req, res){
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
                     console.log("made it in if")
-                    console.log(results)
-                    console.log(results.length)
-                    res.render("DevPugs/devStatusPage",{
+                    var string = JSON.stringify(results);
+                    var json = JSON.parse(string);
+                    let array = Object.values(json[0])
+                    console.log(array)
+                    console.log(array.length)
+                    res.render("ManagerFiles/managerStatusPage",{
                         empname: name,
                         lname: lastname,
+                        array,
                         rows: results
                     });
                 })
             }else {
                 console.log('made it in else')
-                console.log(results)
-                console.log(results.length)
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
-
-                res.render("DevPugs/devStatusPage",{
+                let array = Object.values(json[0])
+                console.log(array)
+                console.log(array.length)
+                res.render("ManagerFiles/managerStatusPage",{
                     empname: name,
                     lname: lastname,
+                    array,
                     rows: results
                 });
             }
@@ -305,19 +317,20 @@ app.get("/directorEmployeeReport", function (req, res){
 })
 app.get("/directorHomePage", function(req, res) {
     if(req.session.loggedin){
-        connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
             console.log(results);
             var string = JSON.stringify(results);
             console.log('>> string: ', string);
             var json = JSON.parse(string);
-            console.log(json[0].firstName);
             name =  json[0].firstName;
-            console.log(fullDate);
+            lname =  json[0].lastName;
             if (error) throw error;
             res.render("DirectorPages/DirectorHomePage",{
                 user: username,
-                date:mdate,
-                empname: name});
+                date: mdate,
+                empname: name,
+                lname : lname
+            });
         })}else {
         res.send('Please login to view this page!');
     }})
