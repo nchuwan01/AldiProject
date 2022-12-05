@@ -1,14 +1,7 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 let con = require('./public/js/db')
->>>>>>> parent of bcba4e2 (reset pushed)
-=======
-//let con = require('./public/js/db')
->>>>>>> main
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -95,14 +88,14 @@ app.post('/reset',function (req, res){
         var json = JSON.parse(string);
         console.log(json[0].count);
         console.log(username,email,password)
-        if(json[0].count == 1){
+        if(json[0].count === 1){
             console.log("COunt found")
             connection.query('UPDATE login SET password=? WHERE employeeid = ?',[password[0],username],(error,results,field )=>{
                 console.log(password[0]);
                 console.log(username);
                 if (error){
                     return console.error(error.message);
-                    alert("ERRROR: incorrect email or username");
+                    alert("ERROR: incorrect email or username");
                 }
                 res.render("login")
                 res.end();
@@ -151,27 +144,7 @@ app.post('/register', function (req,res) {
                 res.render("logIn")
                 res.end();
             });
-
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> main
-
-
-        /*  if(results.)
-          {
-              console.log("Found!");
-<<<<<<< HEAD
-
-          }*/
-
->>>>>>> parent of bcba4e2 (reset pushed)
-=======
-          }*/
-
->>>>>>> main
     })
 });
 
@@ -211,18 +184,7 @@ app.post('/auth',function (req,res){
                     }});
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-               // res.send('Incorrect Username and/or Password!');
->>>>>>> parent of bcba4e2 (reset pushed)
-=======
-
-                // res.send('Incorrect Username and/or Password!');
->>>>>>> main
             }
-
         });
     } else {
         console.log(username,password)
