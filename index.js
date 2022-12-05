@@ -272,6 +272,7 @@ app.get("/directorHomePage", function(req, res) {
             console.log(fullDate);
             if (error) throw error;
             res.render("DirectorPages/DirectorHomePage",{
+
                 user: username,
                 date:mdate,
                 empname: name});
@@ -334,8 +335,17 @@ app.get("/devHomePage", function(req, res) {
     }
 });
 app.get("/managerHomePage", function(req, res) {
-    if(req.session.loggedin){
-    connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+        var Years;
+        if(req.session.loggedin){
+            connection.query('SELECT yearsWorked FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+                console.log(results);
+                var string = JSON.stringify(results);
+                console.log('>> string: ', string);
+                var json = JSON.parse(string);
+                console.log(json[0].yearsWorked);
+                Years =  json[0].yearsWorked;
+            });
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
         console.log(results);
         var string = JSON.stringify(results);
         console.log('>> string: ', string);
@@ -346,6 +356,7 @@ app.get("/managerHomePage", function(req, res) {
         console.log(fullDate);
         if (error) throw error;
         res.render("ManagerFiles/managerHomePage",{
+            YearsWorked: Years,
             user: username,
             date:mdate,
             empname: name,
