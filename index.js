@@ -73,8 +73,6 @@ app.post("/requested", function (req,res){
     else
         console.log("Please reneter");
 })
-
-
 app.post('/reset',function (req, res){
     let email = req.body.email;
     let username = req.body.username;
@@ -104,20 +102,6 @@ app.post('/reset',function (req, res){
 
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.post('/register', function (req,res) {
 
     let employeeid = req.body.username;
@@ -146,16 +130,6 @@ app.post('/register', function (req,res) {
             });
 
         }
-<<<<<<< HEAD
-=======
-
-
-        /*  if(results.)
-          {
-              console.log("Found!");
-          }*/
-
->>>>>>> main
     })
 });
 
@@ -193,11 +167,6 @@ app.post('/auth',function (req,res){
                     }});
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
-<<<<<<< HEAD
-=======
-
-                // res.send('Incorrect Username and/or Password!');
->>>>>>> main
             }
 
         });
