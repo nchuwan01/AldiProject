@@ -77,14 +77,6 @@ app.post('/register', function (req,res) {
             });
 
         }
-
-
-        /*  if(results.)
-          {
-              console.log("Found!");
-
-          }*/
-
     })
 });
 
@@ -111,7 +103,6 @@ app.post('/auth',function (req,res){
                     console.log(json[0].role);
                     if (error) throw error;
                     if(json[0].role==="Employee"){
-                        //res.render("DevPugs/devHomePage")
                         res.redirect("/devHomePage")
                         res.end();
                     }else if(json[0].role === "Manager"){
@@ -119,13 +110,10 @@ app.post('/auth',function (req,res){
                         res.redirect("/managerHomePage")
                         res.end();
                     }else{
-                        //res.render("DirectorPages/DirectorHomePage")
                         res.redirect("/directorHomePage")
                     }});
             }  else {
                 res.render("login", {data: "Incorrect Employee ID/Password"})
-
-               // res.send('Incorrect Username and/or Password!');
             }
 
         });
