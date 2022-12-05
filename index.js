@@ -199,7 +199,7 @@ app.get("/managerStatusPage", function (req, res){
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
-
+                console.log(json)
                 res.render("ManagerFiles/managerStatusPage",{
                     empname: name,
                     lname: lastname,
@@ -218,6 +218,7 @@ app.get("/devStatusPage", function (req, res){
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
                     console.log("made it in if")
+                    console.log(results)
                     console.log(results.length)
                     res.render("DevPugs/devStatusPage",{
                         empname: name,
@@ -227,6 +228,7 @@ app.get("/devStatusPage", function (req, res){
                 })
             }else {
                 console.log('made it in else')
+                console.log(results)
                 console.log(results.length)
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
