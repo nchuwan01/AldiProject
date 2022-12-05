@@ -7,6 +7,10 @@ let bodyParser = require('body-parser')
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of a602745 (Update index.js)
 =======
 let con = require('./public/js/db')
 >>>>>>> parent of 7b9f71c (Update index.js)
@@ -25,6 +29,12 @@ let con = require('./public/js/db')
 =======
 let con = require('./public/js/db')
 >>>>>>> parent of bcba4e2 (reset pushed)
+<<<<<<< HEAD
+=======
+=======
+let con = require('./public/js/db')
+>>>>>>> parent of bcba4e2 (reset pushed)
+>>>>>>> parent of a602745 (Update index.js)
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -156,6 +166,12 @@ app.post('/auth',function (req,res){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of bcba4e2 (reset pushed)
+=======
+>>>>>>> parent of a602745 (Update index.js)
 >>>>>>> parent of bcba4e2 (reset pushed)
 =======
 >>>>>>> parent of bcba4e2 (reset pushed)
