@@ -1,5 +1,6 @@
 doctype html
 head
+
     title Employee Status
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -9,6 +10,37 @@ head
     link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
 
     include ../includes/EmpSideBar
+
+    style.
+        .main{
+            position: relative;
+            background-color: green;
+
+        }
+        #tableData
+        {
+            position: absolute;
+            left: 10%;
+            width: 80%;
+
+
+        }
+
+        .my-custom-scrollbar {
+            position: relative;
+            height: 400px;
+            width: 500px;
+            overflow: auto;
+        }
+
+        .table-wrapper-scroll-y {
+            display: block;
+        }
+
+
+div.main
+    #tableData(class="table-wrapper-scroll-y my-custom-scrollbar")
+        table.table.table-striped(class="table table-bordered table-striped mb-0")
 .main
     if rows.length === 1
         table.table.table-striped
