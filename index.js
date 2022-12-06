@@ -130,14 +130,34 @@ app.post('/auth',function (req,res){
 //         }
 //     }
 // });
-app.post('/reset', function (req,res){
-    let employeeid = req.body.username;
+app.post('/reset',function (req, res){
     let email = req.body.email;
-    console.log(employeeid,email);
-    
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username,email,password);
+    connection.query('SELECT count(1) AS count FROM employee WHERE employeeid =? AND email = ?',[username,email],(error, results,field)=>
+    {if (error) throw "Error!";
+        console.log(results);
+        var string = JSON.stringify(results);
+        console.log('>> string: ', string);
+        var json = JSON.parse(string);
+        console.log(json[0].count);
+        console.log(username,email,password)
+        if(json[0].count == 1){
+            console.log("COunt found")
+            connection.query('UPDATE login SET password=? WHERE employeeid = ?',[password[0],username],(error,results,field )=>{
+                console.log(password[0]);
+                console.log(username);
+                if (error){
+                    return console.error(error.message);
+                    alert("ERRROR: incorrect email or username");
+                }
+                res.render("login")
+                res.end();
+            })
+        }
 
-
-
+    })
 })
 
 app.post('/register', function (req,res) {
