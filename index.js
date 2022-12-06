@@ -13,6 +13,7 @@ const mysql = require('mysql');
 let connection = require ("./dbLogin");
 let username ="";
 let name="";
+let role="";
 let date = new Date();
 let day = date.getDate();
 let month = date.getMonth()+1;
@@ -109,6 +110,7 @@ app.post('/auth',function (req,res){
                     console.log('>> string: ', string);
                     var json = JSON.parse(string);
                     console.log(json[0].role);
+                    role=json[0].role;
                     if (error) throw error;
                     if(json[0].role==="Employee"){
                         //res.render("DevPugs/devHomePage")
@@ -351,6 +353,17 @@ app.get("/managerHomePage", function(req, res) {
                 console.log(json[0].yearsWorked);
                 Years =  json[0].yearsWorked;
             });
+            //grabs max vd pd and sd from employee
+
+            connection.query('SELECT * FROM accural WHERE role=? AND yearsWorked < ?',[role, Years],function(error,results,fields){
+                if (error) throw error;
+                //SELECT maxVac FROM `accural` WHERE role="Manager" AND yearsWorked <= 8
+                console.log("MaxVAC")
+                console.log(role, Years)
+                console.log(results);
+                var string = JSON.stringify(results);
+                console.log('>> string: ', string);
+            });
             //pulls vd sd and pd for employee
             connection.query('SELECT vd, pd, sd FROM ptoBalance WHERE employeeid = ?',[username],function(error,results,fields){
                 console.log(results);
@@ -361,35 +374,24 @@ app.get("/managerHomePage", function(req, res) {
                 SD=json[0].sd;
                 PD=json[0].pd;
             });
-            // //grabs max vd pd and sd from employee
-            // connection.query('SELECT maxVac FROM accural WHERE role = ? AND yearsWorked <= ?',["Manager", Years],function(error,results,fields){
-            //     //SELECT maxVac FROM `accural` WHERE role="Manager" AND yearsWorked <= 8
-            //     console.log("MaxVAC")
-            //     console.log(results);
-            //     var string = JSON.stringify(results);
-            //     console.log('>> string: ', string);
-            //     var json = JSON.parse(string);
-            //
-            // });
-
-        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-        console.log(results);
-        var string = JSON.stringify(results);
-        console.log('>> string: ', string);
-        var json = JSON.parse(string);
-        console.log(json[0].firstName);
-        name =  json[0].firstName;
-        lastname =  json[0].lastName;
-        console.log(fullDate);
-        if (error) throw error;
-        res.render("ManagerFiles/managerHomePage",{
-            vac:VD,
-            YearsWorked: Years,
-            user: username,
-            date:mdate,
-            empname: name,
-            lname: lastname
-        });
+            connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results);
+            var string = JSON.stringify(results);
+            console.log('>> string: ', string);
+            var json = JSON.parse(string);
+            console.log(json[0].firstName);
+            name =  json[0].firstName;
+            lastname =  json[0].lastName;
+            console.log(fullDate);
+            if (error) throw error;
+            res.render("ManagerFiles/managerHomePage",{
+                vac:VD,
+                YearsWorked: Years,
+                user: username,
+                date:mdate,
+                empname: name,
+                lname: lastname
+            });
     })}else{
         res.send('Please login to view this page!');
     }
