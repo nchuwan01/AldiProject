@@ -354,15 +354,20 @@ app.get("/managerHomePage", function(req, res) {
                 Years =  json[0].yearsWorked;
             });
             //grabs max vd pd and sd from employee
-
-            connection.query('SELECT * FROM accural WHERE role=? AND yearsWorked < ?',[role, Years],function(error,results,fields){
+            connection.query('SELECT vacPerYear,yearsWorked FROM accural WHERE role=? ',[role],function(error,results,fields){
                 if (error) throw error;
-                //SELECT maxVac FROM `accural` WHERE role="Manager" AND yearsWorked <= 8
-                console.log("MaxVAC")
-                console.log(role, Years)
                 console.log(results);
                 var string = JSON.stringify(results);
-                console.log('>> string: ', string);
+                var json=JSON.parse(string);
+                var max=0;
+                console.log(json)
+                for(key in json){
+                        console.log(json[key].yearsWorked);
+                     if(json[key].yearsWorked>max){
+                         max=json[key].yearsWorked;
+                         maxVD=json[key].vacPerYear;
+                     }
+                }
             });
             //pulls vd sd and pd for employee
             connection.query('SELECT vd, pd, sd FROM ptoBalance WHERE employeeid = ?',[username],function(error,results,fields){
@@ -385,6 +390,7 @@ app.get("/managerHomePage", function(req, res) {
             console.log(fullDate);
             if (error) throw error;
             res.render("ManagerFiles/managerHomePage",{
+                maxVac:maxVD,
                 vac:VD,
                 YearsWorked: Years,
                 user: username,
