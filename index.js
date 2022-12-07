@@ -274,7 +274,6 @@ app.get("/directorHomePage", function(req, res) {
             console.log(fullDate);
             if (error) throw error;
             res.render("DirectorPages/DirectorHomePage",{
-
                 user: username,
                 date:mdate,
                 empname: name});
