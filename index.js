@@ -40,17 +40,8 @@ app.post("/requested", function (req,res){
     let endD = req.body.endDate;
     let com = req.body.TextInfo;
     let TodayDate = startD.getFullYear;
-    /*let yearToday = startD.getFullYear();
-    let monthToday = (startD.getMonth()) + 1;
-    let dayToday = (startD.getDay()) - 1;
 
-    let totalDaysYear = (yearToday - year) * 365;
-    let totalDaysMonth = (monthToday - month) * 30.4;
-    let totalDays = dayToday - day;
-    let totalDaysCount = parseInt((totalDaysYear + totalDaysMonth + totalDays) / 365);*/
     i++;
-    console.log(name, username)
-    console.log(TodayDate);
     if(sVal && startD && endD)
     {
         if(req.session.loggedin)
@@ -60,8 +51,6 @@ app.post("/requested", function (req,res){
                     if (error) {
                         return console.error(error.message);
                     }
-                    // get inserted rows
-                    console.log('Row inserted:' + results.affectedRows);
                     res.render("ManagerFiles/RequestPage")
                     res.end();
                 });
@@ -69,27 +58,19 @@ app.post("/requested", function (req,res){
         }
 
     else
-        console.log("Please reneter");
+        console.log("Please reenter");
 })
 
 app.post('/reset',function (req, res){
     let email = req.body.email;
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username,email,password);
     connection.query('SELECT count(1) AS count FROM employee WHERE employeeid =? AND email = ?',[username,email],(error, results,field)=>
     {if (error) throw "Error!";
-        console.log(results);
         var string = JSON.stringify(results);
-        console.log('>> string: ', string);
         var json = JSON.parse(string);
-        console.log(json[0].count);
-        console.log(username,email,password)
         if(json[0].count === 1){
-            console.log("COunt found")
             connection.query('UPDATE login SET password=? WHERE employeeid = ?',[password[0],username],(error,results,field )=>{
-                console.log(password[0]);
-                console.log(username);
                 if (error){
                     return console.error(error.message);
                     alert("ERROR: incorrect email or username");
@@ -98,33 +79,23 @@ app.post('/reset',function (req, res){
                 res.end();
             })
         }
-
     })
 })
 
 app.post('/register', function (req,res) {
-
     let employeeid = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
-    console.log(employeeid, password);
     connection.query('SELECT Count(1) AS count FROM employee WHERE employeeid = ? AND email= ?', [employeeid, email], function (error, results, fields) {
         if (error) throw "Error!";
-        console.log(results);
         var string = JSON.stringify(results);
-        console.log('>> string: ', string);
         var json = JSON.parse(string);
-        console.log(json[0].count);
 
-        console.log(employeeid, password);
-        if (json[0].count == 1) {
-            console.log(employeeid)
+        if (json[0].count === 1) {
             connection.query('INSERT INTO login(employeeid,password) values(?, ?)', [employeeid, password], (error, results, field) => {
                 if (error) {
                     return console.error(error.message);
                 }
-                // get inserted rows
-                console.log('Row inserted:' + results.affectedRows);
                 res.render("logIn")
                 res.end();
             });
@@ -135,7 +106,6 @@ app.post('/register', function (req,res) {
 app.post('/auth',function (req,res){
     username = req.body.username
     let password = req.body.password
-    console.log(username,password)
     if(username && password){
         connection.query('SELECT * FROM login WHERE employeeid = ? AND password = ?', [username, password], function(error, results, fields) {
             // If there is an issue with the query, output the error
@@ -148,22 +118,17 @@ app.post('/auth',function (req,res){
 
                 // Redirect to home page
                 connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
-                    console.log(results);
                     var string = JSON.stringify(results);
-                    console.log('>> string: ', string);
                     var json = JSON.parse(string);
-                    console.log(json[0].role);
+
                     if (error) throw error;
-                    if(json[0].role==="Employee"){
-                        //res.render("DevPugs/devHomePage")
+                    if(json[0].role === "Employee"){
                         res.redirect("/devHomePage")
                         res.end();
                     }else if(json[0].role === "Manager"){
-                        //res.render("ManagerFiles/managerHomePage")
                         res.redirect("/managerHomePage")
                         res.end();
                     }else{
-                        //res.render("DirectorPages/DirectorHomePage")
                         res.redirect("/directorHomePage")
                     }});
             }  else {
@@ -171,7 +136,6 @@ app.post('/auth',function (req,res){
             }
         });
     } else {
-        console.log(username,password)
         res.send({username},{password})
         res.send('Please enter Username and Password!');
         res.end();
@@ -181,15 +145,11 @@ app.post('/auth',function (req,res){
 app.get("/managerStatusPage", function (req, res){
     if(req.session.loggedin){
         connection.query('SELECT * FROM employee NATURAL JOIN request WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results.length)
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-                    console.log("made it in if")
                     var string = JSON.stringify(results);
                     var json = JSON.parse(string);
                     let array = Object.values(json[0])
-                    console.log(array)
-                    console.log(array.length)
                     res.render("ManagerFiles/managerStatusPage",{
                         empname: name,
                         lname: lastname,
@@ -198,14 +158,11 @@ app.get("/managerStatusPage", function (req, res){
                     });
                 })
             }else {
-                console.log('made it in else')
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
                 let array = Object.values(json[0])
-                console.log(array)
-                console.log(array.length)
                 res.render("ManagerFiles/managerStatusPage",{
                     empname: name,
                     lname: lastname,
@@ -221,15 +178,11 @@ app.get("/managerStatusPage", function (req, res){
 app.get("/devStatusPage", function (req, res){
     if(req.session.loggedin){
         connection.query('SELECT * FROM employee NATURAL JOIN request WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results.length)
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-                    console.log("made it in if")
                     var string = JSON.stringify(results);
                     var json = JSON.parse(string);
                     let array = Object.values(json[0])
-                    console.log(array)
-                    console.log(array.length)
                     res.render("ManagerFiles/managerStatusPage",{
                         empname: name,
                         lname: lastname,
@@ -238,14 +191,11 @@ app.get("/devStatusPage", function (req, res){
                     });
                 })
             }else {
-                console.log('made it in else')
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
                 let array = Object.values(json[0])
-                console.log(array)
-                console.log(array.length)
                 res.render("ManagerFiles/managerStatusPage",{
                     empname: name,
                     lname: lastname,
@@ -318,9 +268,7 @@ app.get("/directorEmployeeReport", function (req, res){
 app.get("/directorHomePage", function(req, res) {
     if(req.session.loggedin){
         connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results);
             var string = JSON.stringify(results);
-            console.log('>> string: ', string);
             var json = JSON.parse(string);
             name =  json[0].firstName;
             lname =  json[0].lastName;
@@ -372,19 +320,18 @@ app.get("/devmakeRequest", function(req, res) {
 })
 app.get("/devHomePage", function(req, res) {
     if(req.session.loggedin){
-        connection.query('SELECT firstName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results);
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
             var string = JSON.stringify(results);
-            console.log('>> string: ', string);
             var json = JSON.parse(string);
-            console.log(json[0].firstName);
             name =  json[0].firstName;
-            console.log(fullDate);
+            lastname =  json[0].lastName;
             if (error) throw error;
             res.render("DevPugs/devHomePage",{
                 user: username,
                 date:mdate,
-                empname: name});
+                empname: name,
+                lname: lastname
+            });
         })}else{
         res.send('Please login to view this page!');
     }
@@ -392,14 +339,10 @@ app.get("/devHomePage", function(req, res) {
 app.get("/managerHomePage", function(req, res) {
     if(req.session.loggedin){
         connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results);
             var string = JSON.stringify(results);
-            console.log('>> string: ', string);
             var json = JSON.parse(string);
-            console.log(json[0].firstName);
             name =  json[0].firstName;
             lastname =  json[0].lastName;
-            console.log(fullDate);
             if (error) throw error;
             res.render("ManagerFiles/managerHomePage",{
                 user: username,
