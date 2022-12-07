@@ -115,8 +115,8 @@ include ../includes/EmpSideBar
             data: {
                 labels: ['used', 'available'],
                 datasets: [{
-                    label: 'PTO',
-                    data: [20, 30],
+                    label: 'SD',
+                    data: [#{maxS}-#{sickdays}, #{maxS}],
                     backgroundColor: [
                         'rgba(255,99,132,1)',
                         'rgba(100,99,132,1)'
@@ -130,8 +130,8 @@ include ../includes/EmpSideBar
             data: {
                 labels: ['used', 'available'],
                 datasets: [{
-                    label: 'VTO',
-                    data: [10, 50],
+                    label: 'VD',
+                    data: [#{maxV}-#{vacationdays}, #{maxV}],
                     backgroundColor: [
                         'rgba(100,255,0,1)',
                         'rgba(0,100,255,1)'
@@ -145,8 +145,8 @@ include ../includes/EmpSideBar
             data: {
                 labels: ['used', 'available'],
                 datasets: [{
-                    label: 'SD',
-                    data: [1, 8],
+                    label: 'PD',
+                    data: [#{maxP}-#{personaldays}, #{maxP}],
                     backgroundColor: [
                         'rgba(0,255,255,1)',
                         'rgba(10,98,0,1)'
@@ -156,9 +156,9 @@ include ../includes/EmpSideBar
         });
     .container2.row
         .date.col-lg-4.col-md-12.col-sm-12
-            div Todays Date:11/18/22
-            div Hire Date:11/11/22
-            div Days Till Reset:340
+            div Years Worked:#{yearsworked}
+            div Todays Date:#{date}
+            div Hire Date:#{hire}
     a.buttonReq(href="/devmakeRequest" class="btn btn-info") Go To Request
 
 
