@@ -341,9 +341,9 @@ app.get("/managerHomePage", function(req, res) {
         var VD;
         var maxVD;
         var SD;
-        var maxSD;
         var PD;
-        var maxPD;
+        var requests;
+        var hiredate;
         if(req.session.loggedin){
             connection.query('SELECT yearsWorked FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
                 console.log(results);
@@ -352,6 +352,22 @@ app.get("/managerHomePage", function(req, res) {
                 var json = JSON.parse(string);
                 console.log(json[0].yearsWorked);
                 Years =  json[0].yearsWorked;
+            });
+            //gets a count of all pending requests
+            var req="pending";
+            connection.query('SELECT * FROM request WHERE leaderid=? AND requestStatus=?',[username,req],function (error,result,field){
+                if (error) throw error;
+                console.log(result.length)
+                requests=result.length
+            });
+            connection.query('SELECT hiredate FROM employee WHERE employeeid=?',[username],function (error,result,field){
+                //if(error) throw error;
+                console.log(result)
+                var string = JSON.stringify(result);
+                console.log('>> string: ', string);
+                var json = JSON.parse(string);
+                console.log(json[0].hiredate.substring(0,10));
+                hiredate=json[0].hiredate.substring(0,10);
             });
             //grabs max vd pd and sd from employee
             connection.query('SELECT vacPerYear,yearsWorked FROM accural WHERE role=? ',[role],function(error,results,fields){
@@ -390,6 +406,8 @@ app.get("/managerHomePage", function(req, res) {
             console.log(fullDate);
             if (error) throw error;
             res.render("ManagerFiles/managerHomePage",{
+                hire:hiredate,
+                pending:requests,
                 maxVac:maxVD,
                 vac:VD,
                 YearsWorked: Years,

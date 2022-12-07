@@ -99,16 +99,9 @@ include ../includes/ManagerSideBar
 .main
     .container
         .row.containBoxes
-            .containFirst.col-lg-4.col-md-12.col-sm-12
-                h2 SickDays
-                canvas#doughnut1
-
             .containFirst.col-lg-4.col-md-12.col-sm-12.box2
                 h2 VacationDays
                 canvas#doughnut2
-            .containFirst.col-lg-4.col-md-12.col-sm-12
-                h2 PersonalDays
-                canvas#doughnut3
     script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js')
     script(type='text/javascript').
         var ctx2= document.getElementById("doughnut2")
@@ -128,13 +121,12 @@ include ../includes/ManagerSideBar
         });
     .container2.row
         .requestPending.col-lg-4.col-md-12.col-sm-12
-            h3 !
+            h3 #{pending}
             div you have pending requests
         .date.col-lg-4.col-md-12.col-sm-12
             div Years worked #{YearsWorked}
             div Todays Date #{date}
-            div Hire Date:11/11/22
-            div Days Till Reset:340
+            div Hire Date:#{hire}
     a.buttonReq(href="/makeRequest" class="btn btn-info") Go To Request
 
 
