@@ -13,6 +13,7 @@ const mysql = require('mysql');
 let connection = require ("./dbLogin");
 let username ="";
 let name="";
+let lastname="";
 let role="";
 let date = new Date();
 let day = date.getDate();
