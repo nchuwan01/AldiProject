@@ -430,14 +430,80 @@ app.get("/devHomePage", function(req, res) {
     }
 });
 app.get("/managerHomePage", function(req, res) {
+    var Years;
+    var VD;
+    var maxVD;
+    var SD;
+    var PD;
+    var requests;
+    var hiredate;
     if(req.session.loggedin){
-        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+        //gets years worked
+        connection.query('SELECT yearsWorked FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results);
             var string = JSON.stringify(results);
+            console.log('>> string: ', string);
             var json = JSON.parse(string);
+            console.log(json[0].yearsWorked);
+            Years =  json[0].yearsWorked;
+        });
+        //gets a count of all pending requests
+        var req="pending";
+        connection.query('SELECT * FROM request WHERE leaderid=? AND requestStatus=?',[username,req],function (error,result,field){
+            if (error) throw error;
+            console.log(result.length)
+            requests=result.length
+        });
+        //grabs hiredate
+        connection.query('SELECT hiredate FROM employee WHERE employeeid=?',[username],function (error,result,field){
+            if(error) throw error;
+            console.log(result)
+            var string = JSON.stringify(result);
+            console.log('>> string: ', string);
+            var json = JSON.parse(string);
+            console.log(json[0].hiredate.substring(0,10));
+            hiredate=json[0].hiredate.substring(0,10);
+        });
+        //grabs max vd pd and sd from employee
+        connection.query('SELECT vacPerYear,yearsWorked FROM accural WHERE role=? ',[role],function(error,results,fields){
+            if (error) throw error;
+            console.log(results);
+            var string = JSON.stringify(results);
+            var json=JSON.parse(string);
+            var max=0;
+            console.log(json)
+            for(key in json){
+                console.log(json[key].yearsWorked);
+                if(json[key].yearsWorked>max){
+                    max=json[key].yearsWorked;
+                    maxVD=json[key].vacPerYear;
+                }
+            }
+        });
+        //pulls vd sd and pd for employee
+        connection.query('SELECT vd, pd, sd FROM ptoBalance WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results);
+            var string = JSON.stringify(results);
+            console.log('>> string: ', string);
+            var json = JSON.parse(string);
+            VD=json[0].vd;
+        });
+        connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
+            console.log(results);
+            var string = JSON.stringify(results);
+            console.log('>> string: ', string);
+            var json = JSON.parse(string);
+            console.log(json[0].firstName);
             name =  json[0].firstName;
             lastname =  json[0].lastName;
+            console.log(fullDate);
             if (error) throw error;
             res.render("ManagerFiles/managerHomePage",{
+                hire:hiredate,
+                pending:requests,
+                maxVac:maxVD,
+                vac:VD,
+                YearsWorked: Years,
                 user: username,
                 date:mdate,
                 empname: name,
