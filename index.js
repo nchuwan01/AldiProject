@@ -181,7 +181,7 @@ app.get("/devStatusPage", function (req, res){
                     var string = JSON.stringify(results);
                     var json = JSON.parse(string);
                     let array = Object.values(json[0])
-                    res.render("ManagerFiles/managerStatusPage",{
+                    res.render("devPugs/devStatusPage",{
                         empname: name,
                         lname: lastname,
                         array,
@@ -194,7 +194,7 @@ app.get("/devStatusPage", function (req, res){
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
                 let array = Object.values(json[0])
-                res.render("ManagerFiles/managerStatusPage",{
+                res.render("DevPugs/devStatusPage",{
                     empname: name,
                     lname: lastname,
                     array,
