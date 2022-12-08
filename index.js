@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser')
-let con = require('./public/js/db')
 app.set('view engine', 'pug');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -9,7 +8,6 @@ app.use(express.json())
 app.use(express.static('public'));
 const session = require('express-session');
 const path = require('path');
-const mysql = require('mysql');
 let connection = require ("./dbLogin");
 let username ="";
 let name="";
@@ -56,7 +54,6 @@ app.post("/requested", function (req,res){
                 });
         }
         }
-
     else
         console.log("Please reenter");
 })
@@ -66,7 +63,8 @@ app.post('/reset',function (req, res){
     let username = req.body.username;
     let password = req.body.password;
     connection.query('SELECT count(1) AS count FROM employee WHERE employeeid =? AND email = ?',[username,email],(error, results,field)=>
-    {if (error) throw "Error!";
+    {
+        if (error) throw "Error!";
         var string = JSON.stringify(results);
         var json = JSON.parse(string);
         if(json[0].count === 1){
