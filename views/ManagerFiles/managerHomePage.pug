@@ -99,33 +99,11 @@ include ../includes/ManagerSideBar
 .main
     .container
         .row.containBoxes
-            .containFirst.col-lg-4.col-md-12.col-sm-12
-                h2 SickDays
-                canvas#doughnut1
-
             .containFirst.col-lg-4.col-md-12.col-sm-12.box2
                 h2 VacationDays
                 canvas#doughnut2
-            .containFirst.col-lg-4.col-md-12.col-sm-12
-                h2 PersonalDays
-                canvas#doughnut3
     script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js')
     script(type='text/javascript').
-        var ctx = document.getElementById("doughnut1")
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['used', 'available'],
-                datasets: [{
-                    label: 'PTO',
-                    data: [20, 30],
-                    backgroundColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(100,99,132,1)'
-                    ]
-                }]
-            }
-        });
         var ctx2= document.getElementById("doughnut2")
         var myChart2 = new Chart(ctx2, {
             type: 'pie',
@@ -133,7 +111,7 @@ include ../includes/ManagerSideBar
                 labels: ['used', 'available'],
                 datasets: [{
                     label: 'VTO',
-                    data: [10, 50],
+                    data: [(#{maxVac}-#{vac}), #{maxVac}],
                     backgroundColor: [
                         'rgba(100,255,0,1)',
                         'rgba(0,100,255,1)'
@@ -141,29 +119,14 @@ include ../includes/ManagerSideBar
                 }]
             }
         });
-        var ctx3 = document.getElementById("doughnut3")
-        var myChart3 = new Chart(ctx3, {
-            type: 'pie',
-            data: {
-                labels: ['used', 'available'],
-                datasets: [{
-                    label: 'SD',
-                    data: [1, 8],
-                    backgroundColor: [
-                        'rgba(0,255,255,1)',
-                        'rgba(10,98,0,1)'
-                    ]
-                }]
-            }
-        });
     .container2.row
         .requestPending.col-lg-4.col-md-12.col-sm-12
-            h3 !
+            h3 #{pending}
             div you have pending requests
         .date.col-lg-4.col-md-12.col-sm-12
-            div Todays Date:11/18/22
-            div Hire Date:11/11/22
-            div Days Till Reset:340
+            div Years worked #{YearsWorked}
+            div Todays Date #{date}
+            div Hire Date:#{hire}
     a.buttonReq(href="/makeRequest" class="btn btn-info") Go To Request
 
 
