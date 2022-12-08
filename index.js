@@ -18,6 +18,7 @@ let year = date.getFullYear();
 let hours= date.getHours();
 let minutes=date.getMinutes();
 let seconds= date.getSeconds();
+var role="";
 let mdate=`${year}-${month}-${day}`
 let fullDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 
