@@ -176,28 +176,28 @@ app.get("/managerStatusPage", function (req, res){
 app.get("/devStatusPage", function (req, res){
     if(req.session.loggedin){
         connection.query('SELECT * FROM employee NATURAL JOIN request WHERE employeeid = ?',[username],function(error,results,fields){
-            console.log(results.length)
             if (Object.keys(results).length === 0){
                 connection.query('SELECT firstName, lastName FROM employee WHERE employeeid = ?',[username],function(error,results,fields){
-                    console.log("made it in if")
-                    console.log(results.length)
-                    res.render("DevPugs/devStatusPage",{
+                    var string = JSON.stringify(results);
+                    var json = JSON.parse(string);
+                    let array = Object.values(json[0])
+                    res.render("devPugs/devStatusPage",{
                         empname: name,
                         lname: lastname,
+                        array,
                         rows: results
                     });
                 })
             }else {
-                console.log('made it in else')
-                console.log(results.length)
                 var string = JSON.stringify(results);
                 var json = JSON.parse(string);
                 name =  json[0].firstName;
                 lastname = json[0].lastName;
-
+                let array = Object.values(json[0])
                 res.render("DevPugs/devStatusPage",{
                     empname: name,
                     lname: lastname,
+                    array,
                     rows: results
                 });
             }
