@@ -104,6 +104,7 @@ app.post('/auth',function (req,res){
                 req.session.loggedin = true;
                 req.session.username = username;
 
+
                 // Redirect to home page
                 connection.query('SELECT role FROM employee WHERE employeeid = ?',[req.body.username],function(error,results,fields){
                     console.log(results);
@@ -150,6 +151,7 @@ app.post('/reset',function (req, res){
         var string = JSON.stringify(results);
         console.log('>> string: ', string);
         var json = JSON.parse(string);
+
         console.log(json[0].count);
         console.log(username,email,password)
         if(json[0].count == 1){
